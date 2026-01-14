@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<style>
+  /* 1. THE CANVAS: Studio Lighting Effect */
+  body {
+    /* A soft, "blush" radial gradient that mimics studio ring lights */
+    background: radial-gradient(circle at top, #ffffff 0%, #fff5f7 50%, #f9f9f9 100%);
+    color: #222;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* 2. THE MAIN CARD: Frosted Glass / Luxe Vanity Look */
+  .main-card {
+    background: rgba(255, 255, 255, 0.7); /* Translucent white */
+    backdrop-filter: blur(15px);        /* Frosted glass effect */
+    -webkit-backdrop-filter: blur(15px);
+    width: 90%;
+    max-width: 850px;
+    margin: 80px 20px 40px 20px;
+    padding: 60px 20px;
+    border-radius: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.03); /* Subtle "expensive" shadow */
+    text-align: center;
+  }
+
+  /* 3. BRANDING: Gold Accents & Spacing */
+  h1 {
+    font-size: clamp(2.5rem, 8vw, 4rem); /* Responsive size */
+    letter-spacing: 12px;
+    text-transform: uppercase;
+    font-weight: 300;
+    margin-bottom: 0;
+    color: #1a1a1a;
+  }
+
+  .tagline {
+    color: #d4a373; /* Elegant Gold */
+    font-style: italic;
+    font-size: 1.1rem;
+    margin-bottom: 40px;
+    letter-spacing: 2px;
+  }
+
+  /* 4. SERVICES LIST */
+  ul {
+    list-style: none;
+    padding: 0;
+    font-size: 1.4rem;
+    line-height: 2.8;
+    margin-bottom: 50px;
+    color: #444;
+  }
+
+  /* 5. LUXE BUTTONS */
+  .btn {
+    display: inline-block;
+    background-color: #1a1a1a;
+    color: white;
+    padding: 18px 40px;
+    margin: 10px;
+    border-radius: 50px; /* Fully rounded "pill" buttons for softness */
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: all 0.4s ease;
+  }
+
+  .btn:hover {
+    background-color: #d4a373; 
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(212, 163, 115, 0.2);
+  }
+
+  /* 6. GALLERY POLISH */
+  .gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    margin: 40px 0;
+    padding: 20px;
+  }
+
+  .nail-pic {
+    width: 300px;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 30px;
+    transition: all 0.5s ease;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+  }
+
+  .nail-pic:hover {
+    transform: scale(1.03) translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+  }
+
+  /* 7. FOOTER */
+  footer {
+    width: 100%;
+    padding: 60px 20px;
+    background-color: white;
+    border-top: 1px solid #eee;
+    text-align: center;
+  }
+  .guarantee-section {
+    padding: 80px 20px;
+    background-color: #ffffff;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.guarantee-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 40px;
+}
+
+.guarantee-item {
+    flex: 1;
+    min-width: 250px;
+    max-width: 300px;
+    padding: 20px;
+}
+
+.guarantee-item h3 {
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 1rem;
+    color: #d4a373; /* Gold accent */
+    margin-bottom: 15px;
+}
+
+.guarantee-item p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: #666;
+    font-style: normal; /* Keep this clean, not italic */
+}
+</style>
+</head>
+<body>
+    <div class="main-card">
+        <h1>DENIS LOOKS</h1>
+        <p class="tagline">Exclusive House Call Nail Artistry & Care in Embu</p>
+        
+       <h2>Mobile Signature Services</h2>
+    <p style="color: #d4a373; font-weight: bold; letter-spacing: 1px;">
+        PROMPT & PROFESSIONAL SERVICE AT YOUR DOORSTEP
+    </p>
+        <ul>
+            <li>Gel Polish</li>
+            <li>Tips Gel</li>
+            <li>Overlays (Gumgel)</li>
+        </ul>
+
+        <div class="booking-container">
+            <a href="https://wa.me/254741959888" target="_blank" class="btn">Book Appointment</a>
+           <a href="https://www.instagram.com/mwauraa_h" target="_blank" class="btn">View Portfolio</a>
+        </div>
+    </div> <h2 id="portfolio" style="margin-top: 100px;">Recent Looks</h2>
+    <div class="gallery">
+        <img src="nails1.png.png" class="nail-pic">
+        <img src="nails2.png.png" class="nail-pic">
+    </div>
+    <section class="guarantee-section">
+    <h2>The Professional Standard</h2>
+    <div class="guarantee-grid">
+        <div class="guarantee-item">
+            <h3>Sterilized Tools</h3>
+            <p>Your safety is priority. All metal tools are medical-grade sterilized before every house call.</p>
+        </div>
+        <div class="guarantee-item">
+            <h3>Premium Products</h3>
+            <p>I use only high-end Gel and Gumgel brands to ensure your set lasts 3+ weeks without chipping.</p>
+        </div>
+        <div class="guarantee-item">
+            <h3>Punctuality</h3>
+            <p>I respect your time. Expect a professional setup at your University of Embu area residence right on schedule.</p>
+        </div>
+    </div>
+</section>
+<footer id="contact">
+    <div class="footer-content">
+        <h3>Service Coverage</h3>
+        <p class="location">Exclusively House Calls — Serving University of Embu Area & Surroundings</p>
+        
+        <div class="hours-grid">
+            <div class="day-row">
+                <span>Monday - Friday</span> 
+                <span>9:00 AM - 7:00 PM</span>
+            </div>
+            <div class="day-row">
+                <span>Saturday</span> 
+                <span>6:00 PM - 10:00 PM</span>
+            </div>
+            <div class="day-row">
+                <span>Sunday</span> 
+                <span>Closed</span>
+            </div>
+        </div>
+
+        <p style="font-size: 0.9rem; color: #888; margin-top: 20px;">
+            *Transport charges may apply depending on distance.
+        </p>
+
+        <div class="social-links">
+            <p>© 2026 DENIS LOOKS | Mobile Nail Tech</p>
+        </div>
+    </div>
+</footer>
+</body>
+</body>
+</html>
