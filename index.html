@@ -152,6 +152,102 @@
     color: #666;
     font-style: normal; /* Keep this clean, not italic */
 }
+.pro-standards {
+    padding: 60px 20px;
+    margin-top: 40px;
+}
+
+.standards-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.standard-card {
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(212, 163, 115, 0.1);
+    padding: 30px;
+    border-radius: 25px;
+    flex: 1;
+    min-width: 250px;
+    max-width: 300px;
+    transition: transform 0.3s ease;
+}
+
+.standard-card:hover {
+    transform: translateY(-10px);
+    background: #fff;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.05);
+}
+
+.standard-card .icon {
+    font-size: 2rem;
+    margin-bottom: 15px;
+}
+
+.standard-card h3 {
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.9rem;
+    color: #1a1a1a;
+    margin-bottom: 10px;
+}
+
+.standard-card p {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: #666;
+}
+.rate-container {
+    text-align: left;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.rate-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.service-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.service-name {
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.95rem;
+}
+
+.service-desc {
+    font-size: 0.8rem;
+    color: #999;
+    font-style: italic;
+    margin-top: 4px;
+}
+
+.price {
+    color: #d4a373; /* Your signature gold */
+    font-weight: bold;
+    font-size: 1.1rem;
+    white-space: nowrap;
+}
+
+.rate-footer-note {
+    margin-top: 30px;
+    font-size: 0.75rem;
+    color: #bbb;
+    line-height: 1.5;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
 </style>
 </head>
 <body>
@@ -168,6 +264,51 @@
             <li>Tips Gel</li>
             <li>Overlays (Gumgel)</li>
         </ul>
+        <section class="rate-card">
+    <div class="main-card">
+        <span class="badge">Price List</span>
+        <h2>Services & Investment</h2>
+        
+        <div class="rate-container">
+            <div class="rate-item">
+                <div class="service-info">
+                    <span class="service-name">Gel Polish</span>
+                    <span class="service-desc">Clean prep & flawless color</span>
+                </div>
+                <span class="price">Ksh 500</span>
+            </div>
+
+            <div class="rate-item">
+                <div class="service-info">
+                    <span class="service-name">Tips + Gel</span>
+                    <span class="service-desc">Depending on your inspo</span>
+                </div>
+                <span class="price">Ksh 800 - 1,200</span>
+            </div>
+
+            <div class="rate-item">
+                <div class="service-info">
+                    <span class="service-name">Gumgel (Natural Nails)</span>
+                    <span class="service-desc">Strength & protection</span>
+                </div>
+                <span class="price">Ksh 1,000</span>
+            </div>
+
+            <div class="rate-item">
+                <div class="service-info">
+                    <span class="service-name">Gumgel + Tips</span>
+                    <span class="service-desc">Full extension</span>
+                </div>
+                <span class="price">Ksh 1,500</span>
+            </div>
+        </div>
+
+        <p class="rate-footer-note">
+            *Exclusively House Calls in University of Embu Area.<br>
+            A small transport fee may apply for outside locations.
+        </p>
+    </div>
+</section>
 
         <div class="booking-container">
             <a href="https://wa.me/254741959888" target="_blank" class="btn">Book Appointment</a>
@@ -178,20 +319,29 @@
         <img src="nails1.png.png" class="nail-pic">
         <img src="nails2.png.png" class="nail-pic">
     </div>
-    <section class="guarantee-section">
-    <h2>The Professional Standard</h2>
-    <div class="guarantee-grid">
-        <div class="guarantee-item">
-            <h3>Sterilized Tools</h3>
-            <p>Your safety is priority. All metal tools are medical-grade sterilized before every house call.</p>
-        </div>
-        <div class="guarantee-item">
-            <h3>Premium Products</h3>
-            <p>I use only high-end Gel and Gumgel brands to ensure your set lasts 3+ weeks without chipping.</p>
-        </div>
-        <div class="guarantee-item">
-            <h3>Punctuality</h3>
-            <p>I respect your time. Expect a professional setup at your University of Embu area residence right on schedule.</p>
+    <section class="pro-standards">
+    <div class="main-card">
+        <span class="badge">The Denis Looks Difference</span>
+        <h2>Why Clients Choose Me</h2>
+        
+        <div class="standards-grid">
+            <div class="standard-card">
+                <div class="icon">✨</div>
+                <h3>Mobile Luxury</h3>
+                <p>Skip the salon wait. I bring the full professional studio experience directly to your doorstep in Embu.</p>
+            </div>
+            
+            <div class="standard-card">
+                <div class="icon">🛡️</div>
+                <h3>Safety First</h3>
+                <p>Medical-grade sterilization of all tools before every house call. Your health and hygiene are non-negotiable.</p>
+            </div>
+
+            <div class="standard-card">
+                <div class="icon">💎</div>
+                <h3>3-Week Wear</h3>
+                <p>I use only premium-grade products ensuring your Gel or Gumgel stays flawless and chip-free for weeks.</p>
+            </div>
         </div>
     </div>
 </section>
