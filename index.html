@@ -251,6 +251,135 @@
     text-transform: uppercase;
     letter-spacing: 1px;
 }
+.inspo-section {
+    padding: 40px 20px;
+}
+
+.inspo-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.inspo-card {
+    width: 200px; /* Smaller cards for inspo */
+    text-align: center;
+}
+
+.inspo-card img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 15px;
+    filter: grayscale(30%); /* Subtle artistic effect */
+    transition: all 0.4s ease;
+}
+
+.inspo-card img:hover {
+    filter: grayscale(0%);
+    transform: scale(1.05);
+}
+
+.inspo-card p {
+    font-size: 0.8rem;
+    color: #999;
+    margin-top: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.inspo-grid {
+    display: grid;
+    /* Automatically creates columns based on screen size */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.inspo-card {
+    background: #fff;
+    padding: 12px;
+    border-radius: 20px;
+    border: 1px solid rgba(0,0,0,0.03);
+    text-align: left; /* Align text to the left for a magazine feel */
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.inspo-card img {
+    width: 100%;
+    height: 380px;
+    object-fit: cover;
+    border-radius: 15px;
+    display: block;
+}
+
+.inspo-card .category {
+    color: #d4a373; /* Gold accent */
+    font-size: 0.7rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin: 15px 0 5px 0;
+}
+
+.inspo-card .style {
+    font-size: 1rem;
+    color: #333;
+    font-weight: 300;
+}
+
+.inspo-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(212, 163, 115, 0.1);
+}
+.gallery-grid {
+    display: grid;
+    /* Fits 2 items side-by-side on phones, 4 on laptops */
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    margin-top: 40px;
+}
+
+.gallery-item {
+    background: #fff;
+    padding: 8px;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+    transition: all 0.3s ease-in-out;
+}
+
+.gallery-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(212, 163, 115, 0.1);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 320px; /* Uniform height for all 14 slots */
+    object-fit: cover;
+    border-radius: 15px;
+}
+
+.set-details {
+    padding: 10px 5px;
+    text-align: left;
+}
+
+.set-type {
+    color: #d4a373;
+    font-size: 0.65rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin: 0;
+}
+
+.set-style {
+    font-size: 0.85rem;
+    color: #333;
+    margin-top: 2px;
+}
 </style>
 </head>
 <body>
@@ -278,7 +407,7 @@
                     <span class="service-name">Gel Polish</span>
                     <span class="service-desc">Clean prep & flawless color</span>
                 </div>
-                <span class="price">Ksh 500</span>
+                <span class="price">Ksh 400</span>
             </div>
 
             <div class="rate-item">
@@ -302,7 +431,7 @@
                     <span class="service-name">Gumgel + Tips</span>
                     <span class="service-desc">Full extension</span>
                 </div>
-                <span class="price">Ksh 1,500</span>
+                <span class="price">Ksh 1,500 - 1,800</span>
             </div>
         </div>
 
@@ -318,10 +447,147 @@
            <a href="https://www.instagram.com/mwauraa_h" target="_blank" class="btn">View Portfolio</a>
         </div>
     </div> <h2 id="portfolio" style="margin-top: 100px;">Recent Looks</h2>
-    <div class="gallery">
-        <img src="nails1.png.png" class="nail-pic">
-        <img src="nails2.png.png" class="nail-pic">
+    <section id="portfolio" class="recent-looks">
+    <div class="main-card">
+        <span class="badge">My Portfolio</span>
+        <h2>Recent Professional Work</h2>
+        <p class="tagline">High-end artistry delivered to your doorstep in Embu.</p>
+        
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="nails1.png.png" alt="Plain Gel Natural">
+                <div class="set-details"><p class="set-type">Gel Polish</p><p class="set-style">Plain on Natural Nails</p></div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="nails2.png.png" alt="French Tips">
+                <div class="set-details"><p class="set-type">Tips + Gel</p><p class="set-style">Classic French Tips</p></div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="nails3.png.png" alt="3D Chrome Art">
+                <div class="set-details"><p class="set-type">Artistry</p><p class="set-style">3D & Chrome Art</p></div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="nails4.png.png" alt="Complex 3D Art">
+                <div class="set-details"><p class="set-type">Signature Art</p><p class="set-style">Complex Arts + 3D</p></div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="nails5.png.png" alt="Centered Ombre">
+                <div class="set-details"><p class="set-type">Ombre</p><p class="set-style">Centered Ombre Design</p></div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="nails6.png.png" alt="Nude French">
+                <div class="set-details"><p class="set-type">Tips + Gel</p><p class="set-style">Nude French Tips</p></div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="nails7.png.png" alt="3D Chrome">
+                <div class="set-details"><p class="set-type">Chrome</p><p class="set-style">3D Chrome Accents</p></div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="nails8.png.png" alt="3D Moulding">
+                <div class="set-details"><p class="set-type">Sculpted</p><p class="set-style">Chrome 3D & Moulding</p></div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="nails9.png.png" alt="Ombre Natural">
+                <div class="set-details"><p class="set-type">Gel Polish</p><p class="set-style">Ombre on Natural Nails</p></div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="nails10.png.png" alt="Simple Chrome">
+                <div class="set-details"><p class="set-type">Chrome</p><p class="set-style">Simple Chrome Designs</p></div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="nails11.png.png" alt="Chrome Stiletto">
+                <div class="set-details"><p class="set-type">Stiletto</p><p class="set-style">Chrome 3D Long Stiletto</p></div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="nails12.png.png" alt="Marble 3D">
+                <div class="set-details"><p class="set-type">Artistry</p><p class="set-style">Marble Design + 3D</p></div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="nails13.png.png" alt="Ombre Stiletto">
+                <div class="set-details"><p class="set-type">Stiletto</p><p class="set-style">Ombre Long Stiletto</p></div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="nails14.png.png" alt="Gel Toes">
+                <div class="set-details"><p class="set-type">Pedicure</p><p class="set-style">Plain Gel on Toes</p></div>
+            </div>
+        </div>
     </div>
+</section>
+   <section class="inspo-section">
+    <div class="main-card">
+        <span class="badge">Pinterest Inspiration</span>
+        <h2>High-End Trend Gallery</h2>
+        <p class="tagline">Explore styles from top nail bars. I can recreate any of these for you.</p>
+        
+        <div class="inspo-grid">
+            <div class="inspo-card">
+                <img src="inspo1.png.png" alt="Gel on Natural">
+                <p class="category">Gel: Natural Nails</p>
+                <p class="style">Minimalist Chic</p>
+            </div>
+            <div class="inspo-card">
+                <img src="inspo2.png.png" alt="Gel on Natural">
+                <p class="category">Gel: Natural Nails</p>
+                <p class="style">Nude Elegance</p>
+            </div>
+
+            <div class="inspo-card">
+                <img src="inspo3.png.png" alt="Tips + Gel Chrome">
+                <p class="category">Tips + Gel</p>
+                <p class="style">Chrome Art</p>
+            </div>
+            <div class="inspo-card">
+                <img src="inspo4.png.png" alt="Tips + Gel Plain">
+                <p class="category">Tips + Gel</p>
+                <p class="style">Plain High-Gloss</p>
+            </div>
+            <div class="inspo-card">
+                <img src="inspo5.png.png" alt="Tips + Gel French">
+                <p class="category">Tips + Gel</p>
+                <p class="style">Classic French Tips</p>
+            </div>
+            <div class="inspo-card">
+                <img src="inspo6.png.png" alt="Tips + Gel 3D">
+                <p class="category">Tips + Gel</p>
+                <p class="style">3D Design Art</p>
+            </div>
+
+            <div class="inspo-card">
+                <img src="inspo7.png.png" alt="Gumgel Natural Chrome">
+                <p class="category">Gumgel: Natural</p>
+                <p class="style">Chrome Effects</p>
+            </div>
+            <div class="inspo-card">
+                <img src="inspo8.png.png" alt="Gumgel Tips Plain">
+                <p class="category">Gumgel + Tips</p>
+                <p class="style">Plain Structure</p>
+            </div>
+            <div class="inspo-card">
+                <img src="inspo9.png.png" alt="Gumgel Natural French">
+                <p class="category">Gumgel: Natural</p>
+                <p class="style">Modern French</p>
+            </div>
+            <div class="inspo-card">
+                <img src="inspo10.png.png" alt="Gumgel Tips 3D">
+                <p class="category">Gumgel + Tips</p>
+                <p class="style">3D Sculpted Art</p>
+            </div>
+        </div>
+    </div>
+</section>
     <section class="pro-standards">
     <div class="main-card">
         <span class="badge">The Denis Looks Difference</span>
