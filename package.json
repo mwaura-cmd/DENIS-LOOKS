@@ -1,0 +1,12 @@
+{
+  "name": "aura-nails-hub",
+  "version": "1.0.0",
+  "description": "Aura Nails Hub — Luxury Nail Artistry & House Calls in Embu",
+  "scripts": {
+    "dev": "npx serve . -p 3000 --no-clipboard",
+    "start": "npx serve . -p 3000 --no-clipboard"
+  },
+  "keywords": ["nails", "embu", "aura", "luxury"],
+  "author": "Denis Mwaura",
+  "license": "UNLICENSED"
+}
