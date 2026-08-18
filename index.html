@@ -156,89 +156,111 @@
             </div>
         </section>
 
-        <!-- Signature Services & Rate Menu -->
-        <section id="services">
+        <!-- Signature Services & Portfolio Gallery -->
+        <section id="services-portfolio">
             <div class="section-container">
                 <div class="section-header">
-                    <span class="section-tag">INVESTMENT MENU</span>
-                    <h2 class="section-title">Signature Services</h2>
-                    <p class="section-subtitle">Transparent pricing with high-grade European gels and medical-grade
-                        sanitation on every service.</p>
+                    <span class="section-tag">INVESTMENT MENU & ARCHIVE</span>
+                    <h2 class="section-title">Signature Services & Portfolio</h2>
+                    <p class="section-subtitle">Transparent pricing and real sets crafted for our clients in Embu. Tap a service below to filter the gallery.</p>
                 </div>
 
-                <div class="services-list">
-                    <div class="service-list-item tilt-card">
-                        <div class="service-list-icon">
-                            <i class="fa-solid fa-spa"></i>
-                        </div>
+                <div class="services-list" id="services-filter-list">
+                    <!-- Added data-category to act as filters -->
+                    <div class="service-list-item tilt-card active" data-category="all" style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; cursor: pointer;">
+                        <div class="service-list-icon"><i class="fa-solid fa-border-all"></i></div>
+                        <h3 class="service-card-title" style="margin-top: 15px;">View All Looks</h3>
+                        <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 5px;">Browse the entire portfolio</p>
+                    </div>
+
+                    <div class="service-list-item tilt-card" data-category="Gel Polish" style="cursor: pointer;">
+                        <div class="service-list-icon"><i class="fa-solid fa-spa"></i></div>
                         <div class="service-list-body">
                             <h3 class="service-card-title">Plain Gel Polish</h3>
                             <ul class="service-features">
                                 <li>Dry Russian cuticle preparation</li>
                                 <li>Base coat strengthening</li>
-                                <li>Dual pigment coat</li>
                                 <li>High-gloss diamond topcoat</li>
                             </ul>
                         </div>
                         <div class="service-list-price">
                             <span class="amount">Ksh 400</span>
-                            <span class="duration">45 mins</span>
                         </div>
                     </div>
 
-                    <div class="service-list-item tilt-card">
-                        <div class="service-list-icon">
-                            <i class="fa-solid fa-wand-sparkles"></i>
-                        </div>
+                    <div class="service-list-item tilt-card" data-category="Tips + Gel" style="cursor: pointer;">
+                        <div class="service-list-icon"><i class="fa-solid fa-wand-sparkles"></i></div>
                         <div class="service-list-body">
                             <h3 class="service-card-title">Tips + Gel Extension</h3>
                             <ul class="service-features">
-                                <li>Almond, Coffin, Stiletto or Square shape</li>
-                                <li>Full tip application and sculpting</li>
+                                <li>Almond, Coffin, Stiletto or Square</li>
+                                <li>Full tip application & sculpting</li>
                                 <li>Premium non-chip gel overlay</li>
                             </ul>
                         </div>
                         <div class="service-list-price">
-                            <span class="amount">Ksh 800 - 1,200</span>
-                            <span class="duration">90 mins</span>
+                            <span class="amount">Ksh 800-1,200</span>
                         </div>
                     </div>
 
-                    <div class="service-list-item tilt-card">
-                        <div class="service-list-icon">
-                            <i class="fa-solid fa-shield"></i>
-                        </div>
+                    <div class="service-list-item tilt-card" data-category="Gumgel" style="cursor: pointer;">
+                        <div class="service-list-icon"><i class="fa-solid fa-shield"></i></div>
                         <div class="service-list-body">
-                            <h3 class="service-card-title">Gumgel Natural Overlays</h3>
+                            <h3 class="service-card-title">Gumgel Overlays</h3>
                             <ul class="service-features">
-                                <li>Structural reinforcement over natural nails</li>
+                                <li>Structural reinforcement</li>
                                 <li>Unbreakable apex build</li>
-                                <li>Promotes healthy natural nail growth</li>
+                                <li>Can include Tips (Ksh 1500-1800)</li>
                             </ul>
                         </div>
                         <div class="service-list-price">
                             <span class="amount">Ksh 1,000</span>
-                            <span class="duration">90 mins</span>
                         </div>
                     </div>
 
-                    <div class="service-list-item tilt-card">
-                        <div class="service-list-icon">
-                            <i class="fa-solid fa-gem"></i>
-                        </div>
+                    <div class="service-list-item tilt-card" data-category="3d" style="cursor: pointer;">
+                        <div class="service-list-icon"><i class="fa-solid fa-paintbrush"></i></div>
                         <div class="service-list-body">
-                            <h3 class="service-card-title">Gumgel + Tips Extension</h3>
+                            <h3 class="service-card-title">3D & Chrome Art</h3>
                             <ul class="service-features">
-                                <li>Polygel sculpted tip architecture</li>
-                                <li>Maximum length and strength</li>
-                                <li>High-impact longevity and design</li>
+                                <li>Molten 3D drops & textures</li>
+                                <li>Airbrush aura & ombré</li>
+                                <li>High-shine chrome mirror finish</li>
                             </ul>
                         </div>
                         <div class="service-list-price">
-                            <span class="amount">Ksh 1,500 - 1,800</span>
-                            <span class="duration">90 mins</span>
+                            <span class="amount">+ Ksh 200-600</span>
                         </div>
                     </div>
+
+                    <div class="service-list-item tilt-card" data-category="Pedicure" style="cursor: pointer;">
+                        <div class="service-list-icon"><i class="fa-solid fa-shoe-prints"></i></div>
+                        <div class="service-list-body">
+                            <h3 class="service-card-title">Gel Toes & Pedi</h3>
+                            <ul class="service-features">
+                                <li>Toe cuticle cleanup</li>
+                                <li>Gel polish application</li>
+                                <li>Long-lasting shine</li>
+                            </ul>
+                        </div>
+                        <div class="service-list-price">
+                            <span class="amount">Ksh 500</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gallery Controls (Search only) -->
+                <div class="gallery-controls" style="margin-top: 40px; justify-content: flex-end;">
+                    <div class="gallery-search-wrap" style="width: 100%; max-width: 400px;">
+                        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                        <input type="text" id="gallery-search" class="gallery-search-input"
+                            placeholder="Search portfolio (e.g. #Chrome, #French)...">
+                    </div>
+                </div>
+
+                <!-- Live Gallery Grid -->
+                <div class="gallery-grid" id="gallery-grid" style="margin-top: 20px;">
+                    <!-- Populated dynamically by app.js -->
                 </div>
             </div>
         </section>
@@ -352,40 +374,7 @@
             </div>
         </section>
 
-        <!-- Dynamic Portfolio Gallery & Latest Uploads -->
-        <section id="portfolio">
-            <div class="section-container">
-                <div class="section-header">
-                    <span class="section-tag">PORTFOLIO ARCHIVE</span>
-                    <h2 class="section-title">Recent Professional Looks</h2>
-                    <p class="section-subtitle">Real sets crafted for our clients in Embu. Filter by category, explore
-                        3D textures, or upload a new look.</p>
-                </div>
-
-                <!-- Gallery Controls -->
-                <div class="gallery-controls">
-                    <div class="filter-bar">
-                        <button class="filter-btn active" data-category="all">All Looks</button>
-                        <button class="filter-btn" data-category="Gel Polish">Gel Polish</button>
-                        <button class="filter-btn" data-category="Tips + Gel">Tips + Gel</button>
-                        <button class="filter-btn" data-category="Gumgel">Gumgel Overlays</button>
-                        <button class="filter-btn" data-category="3d">3D & Chrome Art</button>
-                        <button class="filter-btn" data-category="Pedicure">Pedicure</button>
-                    </div>
-
-                    <div class="gallery-search-wrap">
-                        <i class="fa-solid fa-magnifying-glass search-icon"></i>
-                        <input type="text" id="gallery-search" class="gallery-search-input"
-                            placeholder="Search by style, tag (e.g. #Chrome, #French, #Stiletto)...">
-                    </div>
-                </div>
-
-                <!-- Live Gallery Grid -->
-                <div class="gallery-grid" id="gallery-grid">
-                    <!-- Populated dynamically by app.js -->
-                </div>
-            </div>
-        </section>
+        <!-- Old portfolio section removed as it is merged above -->
 
         <!-- Client Reviews -->
         <section id="reviews" style="background: rgba(14, 10, 19, 0.6);">

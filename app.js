@@ -363,12 +363,16 @@ function downloadImage(id) {
 }
 
 function initFilterTabs() {
-    const buttons = document.querySelectorAll('.filter-btn');
+    const buttons = document.querySelectorAll('.service-list-item[data-category]');
     buttons.forEach(btn => {
         btn.addEventListener('click', () => {
             buttons.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
             currentCategory = btn.dataset.category || 'all';
+            
+            // Scroll down a bit to the gallery so user sees the change
+            document.getElementById('gallery-grid').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            
             renderGallery();
         });
     });

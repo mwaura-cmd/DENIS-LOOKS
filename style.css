@@ -2014,6 +2014,13 @@ section {
   transform: translateY(-3px);
 }
 
+.service-list-item.active {
+  border-color: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 12px 40px rgba(255, 255, 255, 0.1);
+  transform: translateY(-3px);
+}
+
 .service-list-icon {
   width: 56px;
   height: 56px;
