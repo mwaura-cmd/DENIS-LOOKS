@@ -23,12 +23,20 @@ const envKeys = [
 ];
 
 let envContent = '';
+const envJson = {};
 
 envKeys.forEach(key => {
     if (process.env[key]) {
         envContent += `${key}=${process.env[key]}\n`;
+        const cleanKey = key.replace(/^VITE_/, '');
+        if (cleanKey === 'DEPOSIT_PERCENTAGE') {
+            envJson[cleanKey] = Number(process.env[key]);
+        } else {
+            envJson[cleanKey] = process.env[key];
+        }
     }
 });
 
 fs.writeFileSync('.env.local', envContent);
-console.log('✅ Generated .env.local for production static serving.');
+fs.writeFileSync('env-vars.json', JSON.stringify(envJson, null, 2));
+console.log('✅ Generated .env.local and env-vars.json for production static serving.');

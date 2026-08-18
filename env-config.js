@@ -30,11 +30,18 @@ class EnvLoader {
 
     async loadEnv() {
         try {
-            // Attempt to fetch and parse .env.local if served
-            const response = await fetch('.env.local');
-            if (response.ok) {
-                const text = await response.text();
-                this.parseEnvText(text);
+            // First attempt to load JSON format (Best for Render production)
+            const jsonRes = await fetch('env-vars.json?t=' + Date.now());
+            if (jsonRes.ok) {
+                const data = await jsonRes.json();
+                this.env = { ...this.env, ...data };
+            } else {
+                // Fallback to parsing .env.local (Best for local dev)
+                const response = await fetch('.env.local?t=' + Date.now());
+                if (response.ok) {
+                    const text = await response.text();
+                    this.parseEnvText(text);
+                }
             }
         } catch (e) {
             console.log("ℹ️ Using default/stored environment configuration.");
