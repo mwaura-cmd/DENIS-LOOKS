@@ -2,4 +2,5 @@ services:
   - type: web
     name: aura-nails-hub
     env: static
+    buildCommand: npm run build
     staticPublishPath: ./
