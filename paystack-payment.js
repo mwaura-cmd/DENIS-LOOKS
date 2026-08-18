@@ -85,20 +85,38 @@ class PaystackPaymentEngine {
     }
 
     // ─── Trigger Paystack Popup Checkout ──────────────────────────────────────
-    async triggerPaystackPopup(email, clientName, dateTime, location) {
+    async triggerPaystackPopup(emailOrPhone, clientName, dateTime, location) {
         if (!this.currentBooking) return;
 
         this.currentBooking.clientName = clientName;
-        this.currentBooking.clientEmail = email;
+        this.currentBooking.clientEmail = emailOrPhone;
         this.currentBooking.appointmentDate = dateTime;
         this.currentBooking.location = location;
+
+        // Show processing screen while env loads and popup opens
+        document.getElementById('payment-form-step').style.display = 'none';
+        document.getElementById('payment-processing-step').style.display = 'flex';
+
+        // ★ CRITICAL: Await env ready before reading the key (fixes race condition)
+        if (window.envLoader && window.envLoader.ready) {
+            await window.envLoader.ready;
+        }
 
         const publicKey = this.getEnv('PAYSTACK_PUBLIC_KEY', '');
         const amountKobo = this.currentBooking.depositAmount * 100; // Paystack uses kobo
 
-        // Show processing screen while popup loads
-        document.getElementById('payment-form-step').style.display = 'none';
-        document.getElementById('payment-processing-step').style.display = 'flex';
+        // Sanitize email — Paystack requires valid email format
+        // If user entered a phone number, convert it to a derived email
+        let email = emailOrPhone;
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            // Strip non-digits and build a fallback email
+            const digits = email.replace(/\D/g, '');
+            email = `client_${digits || Date.now()}@auranailshub.app`;
+            console.log('ℹ️ Phone entered instead of email — using derived email:', email);
+        }
+
+        console.log(`🔑 Paystack key loaded: ${publicKey ? publicKey.slice(0, 10) + '...' : 'MISSING'}`);
 
         if (!publicKey || publicKey === 'pk_test_your_paystack_public_key_here') {
             // Demo mode — simulate success after 2s
@@ -114,7 +132,7 @@ class PaystackPaymentEngine {
 
         const handler = window.PaystackPop.setup({
             key: publicKey,
-            email: email || `client_${Date.now()}@auranailshub.app`,
+            email: email,
             amount: amountKobo,
             currency: 'KES',
             ref: this.currentBooking.reference,
@@ -131,7 +149,7 @@ class PaystackPaymentEngine {
                 document.getElementById('payment-processing-step').style.display = 'none';
                 document.getElementById('payment-form-step').style.display = 'block';
                 if (window.showToast) {
-                    window.showToast('Payment cancelled. You can try again anytime. 💅');
+                    window.showToast('Payment cancelled. You can try again anytime.');
                 }
             },
             callback: (response) => {

@@ -1,6 +1,8 @@
 /**
  * Aura Nails Hub - Environment Configuration Loader
- * Safely loads variables from .env.local and localStorage overrides.
+ * Safely loads variables from .env.local / env-vars.json.
+ * Exposes window.envLoader.ready (Promise) so other scripts can
+ * await env load before reading keys — this fixes the Paystack race condition.
  */
 
 const DEFAULT_ENV = {
@@ -11,9 +13,9 @@ const DEFAULT_ENV = {
     CONTACT_EMAIL: "auranailshubembu@gmail.com",
     DEPOSIT_PERCENTAGE: 50,
     PAYSTACK_PUBLIC_KEY: "",
-    PAYSTACK_BANK_NAME: "GTBank",
+    PAYSTACK_BANK_NAME: "Equity Bank",
     PAYSTACK_ACC_NAME: "AURA NAILS HUB",
-    PAYSTACK_ACC_NUMBER: "0123456789",
+    PAYSTACK_ACC_NUMBER: "0890184548340",
     TELEGRAM_BOT_TOKEN: "",
     TELEGRAM_CHAT_ID: "",
     FIREBASE_API_KEY: "",
@@ -25,6 +27,9 @@ const DEFAULT_ENV = {
 class EnvLoader {
     constructor() {
         this.env = { ...DEFAULT_ENV };
+        // ready resolves after env fetch finishes — await this before reading keys
+        this._readyResolve = null;
+        this.ready = new Promise(resolve => { this._readyResolve = resolve; });
         this.loadEnv();
     }
 
@@ -35,12 +40,14 @@ class EnvLoader {
             if (jsonRes.ok) {
                 const data = await jsonRes.json();
                 this.env = { ...this.env, ...data };
+                console.log('✅ Loaded env from env-vars.json. Paystack key present:', !!this.env.PAYSTACK_PUBLIC_KEY);
             } else {
                 // Fallback to parsing .env.local (Best for local dev)
                 const response = await fetch('.env.local?t=' + Date.now());
                 if (response.ok) {
                     const text = await response.text();
                     this.parseEnvText(text);
+                    console.log('✅ Loaded env from .env.local. Paystack key present:', !!this.env.PAYSTACK_PUBLIC_KEY);
                 }
             }
         } catch (e) {
@@ -58,8 +65,9 @@ class EnvLoader {
             console.warn("Could not load stored env overrides", e);
         }
 
-        // Expose globally
+        // Expose globally and signal ready
         window.AURA_ENV = this.env;
+        this._readyResolve();
     }
 
     parseEnvText(text) {
@@ -78,7 +86,7 @@ class EnvLoader {
                     value = value.slice(1, -1);
                 }
 
-                // Strip prefix like VITE_
+                // Strip VITE_ prefix
                 const cleanKey = key.replace(/^VITE_/, '');
                 if (cleanKey === 'DEPOSIT_PERCENTAGE') {
                     this.env[cleanKey] = Number(value) || 50;

@@ -2215,6 +2215,16 @@ section {
   .pass-details-grid { grid-template-columns: 1fr; }
   .pass-header { flex-direction: column; align-items: flex-start; gap: 10px; }
   .pass-financial-summary { flex-direction: column; gap: 12px; text-align: center; }
+
+  /* Payment modal form grids — stack on mobile */
+  .payment-form-grid-2col {
+    grid-template-columns: 1fr !important;
+  }
+  .modal-window {
+    max-width: 100% !important;
+    margin: 10px;
+    border-radius: var(--radius-md);
+  }
 }
 
 @media (max-width: 480px) {
@@ -2230,9 +2240,39 @@ section {
     width: 100%;
   }
 
-  .filter-bar { gap: 6px; }
-  .filter-btn { padding: 8px 14px; font-size: 0.78rem; }
   .gallery-search-wrap { max-width: 100%; }
   .review-card { padding: 22px 18px; }
   .btn-primary, .btn-secondary { padding: 13px 22px; font-size: 0.85rem; }
+
+  /* Gallery card content compact */
+  .gallery-card .card-info { padding: 10px 12px; }
+  .card-title { font-size: 0.85rem; }
+  .card-style-sub { font-size: 0.72rem; }
+  .card-footer-btns { flex-direction: column; gap: 8px; }
+  .btn-book-look { width: 100%; justify-content: center; }
+
+  /* Payment modal — single column form fields */
+  .payment-form-grid-2col {
+    grid-template-columns: 1fr !important;
+    display: grid !important;
+  }
+
+  /* Service list items compact */
+  .service-list-item {
+    padding: 16px 14px;
+    gap: 10px 12px;
+  }
+  .service-list-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+  .service-card-title { font-size: 0.9rem; }
+  .service-features li { font-size: 0.75rem; }
+
+  /* Deposit highlight card — column */
+  .deposit-highlight-card {
+    grid-template-columns: 1fr !important;
+    gap: 10px;
+  }
 }
