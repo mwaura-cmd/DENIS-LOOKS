@@ -707,8 +707,8 @@
     <!-- Modal: Lightbox Zoom & Details -->
     <div class="modal-backdrop" id="lightbox-modal">
         <div class="modal-window lightbox-window">
-            <button class="modal-close-btn" id="close-lightbox-modal" style="z-index: 10;">&times;</button>
-            <div class="lightbox-image-wrap">
+            <div class="lightbox-image-wrap" style="position: relative;">
+                <button class="modal-close-btn" id="close-lightbox-modal" style="z-index: 10; position: absolute; top: 15px; right: 15px; background: rgba(0,0,0,0.6); color: white; border: none; font-size: 1.2rem;">&times;</button>
                 <img id="lightbox-img" src="" alt="Nail Look Zoom">
             </div>
             <div class="lightbox-info">
