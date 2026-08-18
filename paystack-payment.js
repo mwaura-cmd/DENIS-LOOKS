@@ -119,9 +119,16 @@ class PaystackPaymentEngine {
         console.log(`🔑 Paystack key loaded: ${publicKey ? publicKey.slice(0, 10) + '...' : 'MISSING'}`);
 
         if (!publicKey || publicKey === 'pk_test_your_paystack_public_key_here') {
-            // Demo mode — simulate success after 2s
-            console.warn('⚠️ Paystack public key not set. Running in demo mode.');
-            setTimeout(() => this.completePayment(`DEMO-${Date.now().toString().slice(-7)}`), 2000);
+            console.warn('⚠️ Paystack public key not set.');
+            document.getElementById('payment-processing-step').style.display = 'none';
+            document.getElementById('payment-form-step').style.display = 'block';
+            
+            const errMsg = 'Payment gateway is currently unavailable (Missing API Key). Please try again later or contact support.';
+            if (window.showToast) {
+                window.showToast(errMsg);
+            } else {
+                alert(errMsg);
+            }
             return;
         }
 
