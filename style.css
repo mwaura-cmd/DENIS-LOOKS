@@ -1692,7 +1692,8 @@ section {
   }
 
   .gallery-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
   }
 
   .modal-window {
@@ -2196,7 +2197,7 @@ section {
   }
 
   /* Gallery */
-  .gallery-grid { grid-template-columns: 1fr; }
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
   .card-quick-actions { opacity: 1; transform: translateY(0); }
 
   /* Reviews */
