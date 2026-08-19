@@ -26,13 +26,16 @@ let envContent = '';
 const envJson = {};
 
 envKeys.forEach(key => {
-    if (process.env[key]) {
-        envContent += `${key}=${process.env[key]}\n`;
-        const cleanKey = key.replace(/^VITE_/, '');
+    // Check for the variable with VITE_ prefix, or without it
+    const cleanKey = key.replace(/^VITE_/, '');
+    const val = process.env[key] || process.env[cleanKey];
+    
+    if (val) {
+        envContent += `${cleanKey}=${val}\n`;
         if (cleanKey === 'DEPOSIT_PERCENTAGE') {
-            envJson[cleanKey] = Number(process.env[key]);
+            envJson[cleanKey] = Number(val);
         } else {
-            envJson[cleanKey] = process.env[key];
+            envJson[cleanKey] = val;
         }
     }
 });
