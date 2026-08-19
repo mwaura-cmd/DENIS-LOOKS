@@ -2222,14 +2222,15 @@ section {
   .footer-container { grid-template-columns: 1fr !important; gap: 30px; }
 
   /* Payment/booking pass */
-  .deposit-highlight-card { grid-template-columns: 1fr; }
-  .pass-details-grid { grid-template-columns: 1fr; }
+  .deposit-highlight-card { grid-template-columns: 1fr !important; gap: 15px; }
+  .pass-details-grid { grid-template-columns: 1fr !important; gap: 15px; }
   .pass-header { flex-direction: column; align-items: flex-start; gap: 10px; }
   .pass-financial-summary { flex-direction: column; gap: 12px; text-align: center; }
 
   /* Payment modal form grids — stack on mobile */
   .payment-form-grid-2col {
     grid-template-columns: 1fr !important;
+    display: grid !important;
   }
   .modal-window {
     max-width: 100% !important;
@@ -2262,12 +2263,6 @@ section {
   .card-footer-btns { flex-direction: column; gap: 8px; }
   .btn-book-look { width: 100%; justify-content: center; }
 
-  /* Payment modal — single column form fields */
-  .payment-form-grid-2col {
-    grid-template-columns: 1fr !important;
-    display: grid !important;
-  }
-
   /* Service list items compact */
   .service-list-item {
     padding: 16px 14px;
@@ -2280,10 +2275,4 @@ section {
   }
   .service-card-title { font-size: 0.9rem; }
   .service-features li { font-size: 0.75rem; }
-
-  /* Deposit highlight card — column */
-  .deposit-highlight-card {
-    grid-template-columns: 1fr !important;
-    gap: 10px;
-  }
 }
