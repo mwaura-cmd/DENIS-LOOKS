@@ -197,7 +197,7 @@ let currentSelectedImageBase64 = null;
 let activeLightboxSet = null;
 
 const WHATSAPP_PHONE = '254741959888';
-const ADMIN_PASS_HASH = '9b35b6e8'; // simple hash of 'aura2024' — change via checkAdminPass()
+const ADMIN_PASS_HASH = '3fe655d6'; // simple hash of 'aura2024' - change via checkAdminPass()
 
 function checkAdminPass() {
  const entered = prompt('Enter admin password to upload:');
