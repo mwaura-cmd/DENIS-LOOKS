@@ -63,6 +63,8 @@ html {
   scroll-behavior: smooth;
   font-size: 16px;
   color-scheme: light;
+  overflow-x: hidden;
+  max-width: 100%;
 }
 
 body {
@@ -2180,7 +2182,27 @@ section {
   .section-header { margin-bottom: 36px; }
 
   /* Nav */
-  .nav-menu { display: none; }
+  .nav-menu { 
+    display: none; 
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: #ffffff;
+    flex-direction: column;
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--border-subtle);
+    box-shadow: 0 10px 30px rgba(107, 39, 55, 0.08);
+  }
+  .nav-menu a {
+    width: 100%;
+    text-align: center;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.04);
+  }
+  .nav-menu a:last-child {
+    border-bottom: none;
+  }
   .mobile-menu-btn { display: block; }
   .nav-actions .btn-upload-nav { display: none; }
 
