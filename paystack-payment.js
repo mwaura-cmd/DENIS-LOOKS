@@ -210,7 +210,7 @@ class PaystackPaymentEngine {
 
         // Prepare WhatsApp Verification Link
         const waMsg = encodeURIComponent(
-            `✨ *AURA NAILS HUB — BOOKING CONFIRMATION & 50% DEPOSIT PAID*\n\n` +
+            `✨ *AURA NAILS HUB — BOOKING CONFIRMATION & 30% DEPOSIT PAID*\n\n` +
             `• *Booking Ref:* ${this.currentBooking.reference}\n` +
             `• *Client:* ${this.currentBooking.clientName}\n` +
             `• *Nail Set:* ${this.currentBooking.setTitle} (${this.currentBooking.setCategory})\n` +
@@ -218,7 +218,7 @@ class PaystackPaymentEngine {
             `• *Location:* ${this.currentBooking.location}\n\n` +
             `💰 *Financials:*\n` +
             `• *Total Price:* Ksh ${this.currentBooking.totalPrice.toLocaleString()}\n` +
-            `• *50% Deposit Paid:* Ksh ${this.currentBooking.depositAmount.toLocaleString()} ✅\n` +
+            `• *30% Deposit Paid:* Ksh ${this.currentBooking.depositAmount.toLocaleString()} ✅\n` +
             `• *Balance Due:* Ksh ${this.currentBooking.balanceAmount.toLocaleString()}\n` +
             `• *Paystack Ref:* ${finalRef}\n\n` +
             `Please confirm my slot in Embu. Thank you!`
@@ -231,7 +231,7 @@ class PaystackPaymentEngine {
         }
 
         if (window.showToast) {
-            window.showToast('🎉 50% Deposit confirmed! Booking secured.');
+            window.showToast('🎉 30% Deposit confirmed! Booking secured.');
         }
 
         // Fire browser push notification + Telegram bot alert

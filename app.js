@@ -297,7 +297,7 @@ function renderGallery() {
     }
 
     galleryContainer.innerHTML = filtered.map(set => {
-        const depositAmount = Math.ceil(set.price * 0.5);
+        const depositAmount = Math.ceil(set.price * 0.3);
         return `
         <div class="gallery-card tilt-card" data-id="${set.id}">
             <div class="card-image-wrap" onclick="openLightbox('${set.id}')">
@@ -320,14 +320,14 @@ function renderGallery() {
                 <h3 class="card-title">${set.title}</h3>
                 <p class="card-style-sub">${set.style}</p>
                 <div style="font-size: 0.78rem; color: var(--gold-light); font-weight: 600; margin-top: 2px;">
-                    50% Deposit: Ksh ${depositAmount.toLocaleString()}
+                    30% Deposit: Ksh ${depositAmount.toLocaleString()}
                 </div>
                 <div class="card-tags-list">
                     ${(set.tags || []).map(tag => `<span class="tag-pill">#${tag}</span>`).join('')}
                 </div>
                 <div class="card-footer-btns">
                     <button type="button" class="btn-book-look" onclick="triggerDepositBooking('${set.id}')" style="background: rgba(212, 163, 115, 0.2); border-color: var(--border-gold);">
-                        <i class="fa-solid fa-credit-card"></i> Pay 50% (Ksh ${depositAmount.toLocaleString()})
+                        <i class="fa-solid fa-credit-card"></i> Pay 30% (Ksh ${depositAmount.toLocaleString()})
                     </button>
                     <a href="${getWhatsAppBookingLink(set)}" target="_blank" class="action-circle-btn" style="border-radius: var(--radius-md); width: 44px; height: 38px;" title="Chat on WhatsApp">
                         <i class="fa-brands fa-whatsapp" style="font-size: 1.1rem; color: #25d366;"></i>
@@ -409,7 +409,7 @@ function renderInspoVault() {
 }
 
 function bookInspoLook(category, style) {
-    const message = encodeURIComponent(`Hi Aura Nails Hub! I saw the inspiration look "${style}" (${category}) on your site and would like to recreate this style with a 50% commitment deposit.`);
+    const message = encodeURIComponent(`Hi Aura Nails Hub! I saw the inspiration look "${style}" (${category}) on your site and would like to recreate this style with a 30% commitment deposit.`);
     window.open(`https://wa.me/${WHATSAPP_PHONE}?text=${message}`, '_blank');
 }
 
@@ -634,8 +634,8 @@ function openLightbox(id) {
 
     const depositBtn = document.getElementById('lightbox-pay-deposit-btn');
     if (depositBtn) {
-        const deposit = Math.ceil(set.price * 0.5);
-        depositBtn.innerHTML = `<i class="fa-solid fa-credit-card"></i> Book with 50% Deposit (Ksh ${deposit.toLocaleString()})`;
+        const deposit = Math.ceil(set.price * 0.3);
+        depositBtn.innerHTML = `<i class="fa-solid fa-credit-card"></i> Book with 30% Deposit (Ksh ${deposit.toLocaleString()})`;
     }
 
     const bookBtn = document.getElementById('lightbox-book-btn');
@@ -647,8 +647,8 @@ function openLightbox(id) {
 }
 
 function getWhatsAppBookingLink(set) {
-    const deposit = Math.ceil(set.price * 0.5);
-    const message = encodeURIComponent(`Hi Aura Nails Hub! ✨ I would love to book the "${set.title}" look (${set.category} - Ksh ${set.price}) with a 50% deposit (Ksh ${deposit}). Are you available for an appointment in Embu?`);
+    const deposit = Math.ceil(set.price * 0.3);
+    const message = encodeURIComponent(`Hi Aura Nails Hub! ✨ I would love to book the "${set.title}" look (${set.category} - Ksh ${set.price}) with a 30% deposit (Ksh ${deposit}). Are you available for an appointment in Embu?`);
     return `https://wa.me/${WHATSAPP_PHONE}?text=${message}`;
 }
 
@@ -670,7 +670,7 @@ function initPriceCalculator() {
 
     function updateCalculator() {
         const total = basePrice + extensionPrice + artPrice + addOnPrice;
-        const deposit = Math.ceil(total * 0.5);
+        const deposit = Math.ceil(total * 0.3);
 
         document.getElementById('calc-total').textContent = `Ksh ${total.toLocaleString()}`;
         document.getElementById('summary-base').textContent = `Ksh ${basePrice.toLocaleString()}`;
@@ -679,7 +679,7 @@ function initPriceCalculator() {
 
         const bookBtn = document.getElementById('calc-book-btn');
         if (bookBtn) {
-            bookBtn.innerHTML = `<i class="fa-solid fa-credit-card"></i> Book Custom Set (50% Deposit: Ksh ${deposit.toLocaleString()})`;
+            bookBtn.innerHTML = `<i class="fa-solid fa-credit-card"></i> Book Custom Set (30% Deposit: Ksh ${deposit.toLocaleString()})`;
             bookBtn.onclick = (e) => {
                 e.preventDefault();
                 if (window.equityPayment) {

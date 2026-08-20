@@ -11,7 +11,7 @@ const DEFAULT_ENV = {
     PHONE_NUMBER: "254741959888",
     LOCATION: "University of Embu & Surrounding Area",
     CONTACT_EMAIL: "auranailshubembu@gmail.com",
-    DEPOSIT_PERCENTAGE: 50,
+    DEPOSIT_PERCENTAGE: 30,
     PAYSTACK_PUBLIC_KEY: "",
     PAYSTACK_BANK_NAME: "Equity Bank",
     PAYSTACK_ACC_NAME: "AURA NAILS HUB",

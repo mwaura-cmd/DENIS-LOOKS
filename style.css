@@ -1742,8 +1742,8 @@ section {
 }
 
 .deposit-highlight-card {
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-gold);
+  background: linear-gradient(135deg, #ffffff 0%, #f8f6f7 100%);
+  border: 1px solid rgba(107, 39, 55, 0.15);
   border-radius: var(--radius-md);
   padding: 20px;
   margin: 15px 0 25px;
@@ -1751,6 +1751,7 @@ section {
   grid-template-columns: 1fr 1fr 1fr;
   gap: 15px;
   text-align: center;
+  box-shadow: 0 8px 24px rgba(107, 39, 55, 0.06);
 }
 
 .deposit-stat-box {
@@ -1911,17 +1912,18 @@ section {
 
 /* Digital Booking Pass / Receipt */
 .booking-pass-card {
-  background: linear-gradient(145deg, #F5F5F5 0%, #ffffff 100%);
-  border: 1.5px solid var(--border-gold);
+  background: linear-gradient(145deg, #ffffff 0%, #fafafa 100%);
+  border: 1px solid var(--border-gold);
+  border-left: 5px solid var(--gold-primary);
   border-radius: var(--radius-lg);
   padding: 30px 25px;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 8px 30px rgba(107, 39, 55, 0.1);
+  box-shadow: 0 12px 40px rgba(107, 39, 55, 0.12);
 }
 
 .booking-pass-card::before {
-  content: 'PAID 50%';
+  content: 'PAID 30%';
   position: absolute;
   top: 50%;
   left: 50%;
