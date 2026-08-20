@@ -917,3 +917,26 @@ function showToast(message) {
         setTimeout(() => toast.remove(), 300);
     }, 3200);
 }
+
+/* ==========================================================================
+   SCROLL TO TOP BUTTON
+   ========================================================================== */
+document.addEventListener('DOMContentLoaded', () => {
+    const scrollToTopBtn = document.getElementById('scroll-to-top-btn');
+    if (!scrollToTopBtn) return;
+
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 400) {
+            scrollToTopBtn.classList.add('visible');
+        } else {
+            scrollToTopBtn.classList.remove('visible');
+        }
+    });
+
+    scrollToTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+});
