@@ -2342,3 +2342,331 @@ section {
   .service-card-title { font-size: 0.9rem; }
   .service-features li { font-size: 0.75rem; }
 }
+
+/* ==========================================================================
+   PREMIUM UPGRADE STYLES
+   ========================================================================== */
+
+/* ── 1. SCROLL REVEAL ─────────────────────────────────────────────────── */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal-on-scroll.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── 2. SKELETON LOADING SHIMMER ─────────────────────────────────────── */
+@keyframes shimmerMove {
+  0% { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+.shimmer {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 400px 100%;
+  animation: shimmerMove 1.4s ease-in-out infinite;
+  border-radius: 6px;
+}
+.skeleton-card {
+  background: #fafafa;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.skeleton-img {
+  width: 100%;
+  aspect-ratio: 4/3;
+}
+.skeleton-body {
+  padding: 14px;
+}
+.skeleton-line {
+  display: block;
+  height: 12px;
+  border-radius: 4px;
+}
+
+/* ── 3. STAT COUNTER ─────────────────────────────────────────────────── */
+.stat-number.counting {
+  color: var(--primary);
+  transition: color 0.3s;
+}
+.stat-number.counted {
+  color: inherit;
+}
+
+/* ── 4. NAIL OF THE WEEK STRIP ───────────────────────────────────────── */
+.notw-strip {
+  background: linear-gradient(90deg, var(--primary) 0%, #8C3A4D 100%);
+  padding: 10px 24px;
+  position: relative;
+  overflow: hidden;
+  z-index: 100;
+}
+.notw-strip::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.06) 50%, transparent 100%);
+  background-size: 200% 100%;
+  animation: stripShimmer 2.5s ease-in-out infinite;
+}
+@keyframes stripShimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+.notw-inner {
+  max-width: 1350px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.notw-badge {
+  background: rgba(255,255,255,0.2);
+  color: #fff;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.3);
+  white-space: nowrap;
+}
+.notw-text {
+  color: rgba(255,255,255,0.92);
+  font-size: 0.85rem;
+  flex: 1;
+}
+.notw-text strong {
+  color: #fff;
+}
+.notw-cta {
+  color: #fff;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-decoration: none;
+  background: rgba(255,255,255,0.15);
+  padding: 4px 12px;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.3);
+  white-space: nowrap;
+  transition: background 0.2s;
+}
+.notw-cta:hover {
+  background: rgba(255,255,255,0.28);
+}
+
+/* ── 5. AVAILABILITY BADGE ───────────────────────────────────────────── */
+.avail-badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.avail-badge::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.avail-open {
+  background: rgba(16, 185, 129, 0.12);
+  color: #10b981;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+.avail-open::before {
+  background: #10b981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.25);
+  animation: pulseAvail 1.5s ease-in-out infinite;
+}
+.avail-busy {
+  background: rgba(251, 191, 36, 0.12);
+  color: #f59e0b;
+  border: 1px solid rgba(251, 191, 36, 0.3);
+}
+.avail-busy::before {
+  background: #f59e0b;
+}
+@keyframes pulseAvail {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+  50% { box-shadow: 0 0 0 5px rgba(16, 185, 129, 0); }
+}
+
+/* ── 6. BUTTON RIPPLE ────────────────────────────────────────────────── */
+.btn-primary, .btn-book-nav {
+  position: relative;
+  overflow: hidden;
+}
+.btn-ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.35);
+  transform: scale(0);
+  animation: rippleEffect 0.6s linear;
+  pointer-events: none;
+}
+@keyframes rippleEffect {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+/* ── 7. CAROUSEL DOTS ────────────────────────────────────────────────── */
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 20px;
+}
+.carousel-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  background: var(--border-subtle);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+.carousel-dot.active {
+  background: var(--primary);
+  width: 22px;
+  border-radius: 4px;
+}
+
+/* ── 8. SOCIAL PROOF TOAST ───────────────────────────────────────────── */
+#social-proof-container {
+  position: fixed;
+  bottom: 180px;
+  left: 20px;
+  z-index: 9000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.social-proof-toast {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #ffffff;
+  border: 1px solid var(--border-subtle);
+  border-left: 4px solid var(--primary);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  animation: slideInToast 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  max-width: 280px;
+}
+@keyframes slideInToast {
+  from { opacity: 0; transform: translateX(-120%); }
+  to { opacity: 1; transform: translateX(0); }
+}
+.sp-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), #8C3A4D);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+.sp-body { flex: 1; min-width: 0; }
+.sp-name { font-size: 0.78rem; font-weight: 700; color: var(--text-main); }
+.sp-look { font-size: 0.72rem; color: var(--primary); font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sp-time { font-size: 0.68rem; color: var(--text-muted); margin-top: 1px; }
+.sp-close {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+/* ── 9. DARK MODE ────────────────────────────────────────────────────── */
+.dark-mode-toggle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-secondary);
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all var(--transition-fast);
+}
+.dark-mode-toggle:hover {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+}
+
+/* Dark Mode Variables */
+html.dark-mode {
+  --bg-main: #121212;
+  --bg-secondary: #1e1e1e;
+  --text-main: #f0eded;
+  --text-muted: #9e9e9e;
+  --text-dim: #6b6b6b;
+  --border-subtle: rgba(255,255,255,0.08);
+}
+html.dark-mode body {
+  background: #121212;
+  color: #f0eded;
+}
+html.dark-mode .site-header.header-scrolled {
+  background: rgba(18, 18, 18, 0.95);
+}
+html.dark-mode .modal-window,
+html.dark-mode .gallery-card,
+html.dark-mode .service-list-item,
+html.dark-mode .calculator-card,
+html.dark-mode .review-card,
+html.dark-mode .booking-pass-card {
+  background: #1e1e1e;
+  border-color: rgba(255,255,255,0.08);
+}
+html.dark-mode .form-input,
+html.dark-mode .form-select {
+  background: #2a2a2a;
+  color: #f0eded;
+  border-color: rgba(255,255,255,0.1);
+}
+html.dark-mode .social-proof-toast {
+  background: #1e1e1e;
+  border-color: rgba(255,255,255,0.08);
+}
+html.dark-mode .site-footer {
+  background: #0d0d0d;
+}
+
+/* Mobile responsive for premium elements */
+@media (max-width: 768px) {
+  .notw-strip { padding: 8px 16px; }
+  .notw-text { font-size: 0.78rem; }
+  #social-proof-container { bottom: 140px; left: 12px; }
+  .social-proof-toast { max-width: 240px; }
+  .dark-mode-toggle { width: 32px; height: 32px; font-size: 0.8rem; }
+}
+
