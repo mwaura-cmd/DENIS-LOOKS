@@ -831,25 +831,38 @@ function initFirebaseModal() {
 }
 
 /* ==========================================================================
- MOBILE NAV TOGGLE
- ========================================================================== */
+ MOBILE NAV T  ========================================================================== */
 function initMobileNav() {
  const toggle = document.querySelector('.mobile-menu-btn');
  const navMenu = document.querySelector('.nav-menu');
+ const header = document.querySelector('.site-header');
+ if (!toggle || !navMenu) return;
 
- toggle?.addEventListener('click', () => {
- const isOpen = navMenu.style.display === 'flex';
- navMenu.style.display = isOpen ? 'none' : 'flex';
- if (!isOpen) {
- navMenu.style.flexDirection = 'column';
- navMenu.style.position = 'absolute';
- navMenu.style.top = '100%';
- navMenu.style.left = '0';
- navMenu.style.width = '100%';
- navMenu.style.background = '#120e18';
- navMenu.style.padding = '25px';
- navMenu.style.borderBottom = '1px solid var(--border-gold)';
+ function openMenu() {
+  navMenu.classList.add('mobile-open');
+  toggle.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+  toggle.setAttribute('aria-expanded', 'true');
  }
+
+ function closeMenu() {
+  navMenu.classList.remove('mobile-open');
+  toggle.innerHTML = '<i class="fa-solid fa-bars"></i>';
+  toggle.setAttribute('aria-expanded', 'false');
+ }
+
+ toggle.addEventListener('click', () => {
+  const isOpen = navMenu.classList.contains('mobile-open');
+  isOpen ? closeMenu() : openMenu();
+ });
+
+ // Close on any nav link click
+ navMenu.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', closeMenu);
+ });
+
+ // Close on outside tap
+ document.addEventListener('click', (e) => {
+  if (!header.contains(e.target)) closeMenu();
  });
 }
 

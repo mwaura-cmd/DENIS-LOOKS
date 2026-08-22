@@ -156,6 +156,17 @@
  </div>
  </section>
 
+  <!-- Nail of the Week Strip -->
+  <div id="notw-strip" class="notw-strip">
+    <div class="notw-inner">
+      <span class="notw-badge">This Week</span>
+      <span class="notw-text">
+        <strong id="notw-title">Chrome Almond Set</strong> &mdash; <span id="notw-cat">Gumgel + Chrome</span>
+      </span>
+      <a href="#portfolio" class="notw-cta">View Look &rsaquo;</a>
+    </div>
+  </div>
+
  <!-- Signature Services & Portfolio Gallery -->
  <section id="services-portfolio">
  <div class="section-container">
@@ -694,6 +705,41 @@
  style="width: 100%; justify-content: center; margin-top: 10px;">
  <i class="fa-solid fa-sparkles"></i> Publish Set to Portfolio
  </button>
+
+ <!-- Nail of the Week Section -->
+ <div style="margin-top: 18px; border-top: 1px solid var(--border-subtle); padding-top: 16px;">
+ <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+ <div style="width: 28px; height: 28px; background: linear-gradient(135deg, var(--primary), #8C3A4D); border-radius: 6px; display: flex; align-items: center; justify-content: center;">
+ <i class="fa-solid fa-star" style="color:#fff; font-size:0.75rem;"></i>
+ </div>
+ <div>
+ <div style="font-size: 0.82rem; font-weight: 700; color: var(--text-main);">Nail of the Week</div>
+ <div style="font-size: 0.72rem; color: var(--text-muted);">Feature a look in the banner strip at the top</div>
+ </div>
+ </div>
+ <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; margin-bottom: 12px;">
+ <input type="checkbox" id="notw-checkbox" style="width: 16px; height: 16px; accent-color: var(--primary);">
+ <span style="font-size: 0.82rem; color: var(--text-main);">Set this look as the weekly feature</span>
+ </label>
+ <div id="notw-manual-section" style="margin-top: 8px;">
+ <div style="font-size: 0.75rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">Or set a custom weekly feature:</div>
+ <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+ <div>
+ <label class="form-label" for="notw-custom-title">Feature Title</label>
+ <input type="text" id="notw-custom-title" class="form-input" placeholder="e.g. Chrome Ombre Coffin">
+ </div>
+ <div>
+ <label class="form-label" for="notw-custom-cat">Category</label>
+ <input type="text" id="notw-custom-cat" class="form-input" placeholder="e.g. Gumgel + Chrome">
+ </div>
+ </div>
+ <button type="button" id="notw-save-btn" class="btn-secondary"
+ style="width: 100%; justify-content: center; margin-top: 10px; font-size: 0.82rem;">
+ <i class="fa-solid fa-star"></i> Update Weekly Feature
+ </button>
+ </div>
+ </div>
+
  </form>
  </div>
  </div>

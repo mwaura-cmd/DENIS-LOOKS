@@ -2238,11 +2238,17 @@ section {
     border-bottom: 1px solid var(--border-subtle);
     box-shadow: 0 10px 30px rgba(107, 39, 55, 0.08);
   }
+  .nav-menu.mobile-open {
+    display: flex !important;
+  }
   .nav-menu a {
     width: 100%;
     text-align: center;
     padding: 12px 0;
     border-bottom: 1px solid rgba(0,0,0,0.04);
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-main);
   }
   .nav-menu a:last-child {
     border-bottom: none;

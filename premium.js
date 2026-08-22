@@ -110,36 +110,59 @@ function showGallerySkeletons(container, count = 6) {
 window.premiumShowSkeletons = showGallerySkeletons;
 
 
-/* ── 4. NAIL OF THE WEEK FEATURE STRIP ─────────────────────────────────── */
-function initFeatureStrip() {
-    // Only inject if not already there
-    if (document.getElementById('notw-strip')) return;
-
-    const heroSection = document.querySelector('.hero-section');
-    if (!heroSection) return;
-
-    // Pull a random featured set from gallery data if available
-    let featuredTitle = 'Chrome Almond Set';
-    let featuredCat = 'Gumgel + Chrome';
-    if (window.GALLERY_DATA && window.GALLERY_DATA.length) {
-        const idx = Math.floor(Math.random() * Math.min(window.GALLERY_DATA.length, 5));
-        const set = window.GALLERY_DATA[idx];
-        if (set) { featuredTitle = set.title; featuredCat = set.category; }
+/* ── 4. NAIL OF THE WEEK — localStorage powered ─────────────────────── */
+function initNailOfTheWeek() {
+    // Load saved NOTW from localStorage and update static HTML
+    const saved = JSON.parse(localStorage.getItem('aura-notw') || 'null');
+    if (saved && saved.title) {
+        const titleEl = document.getElementById('notw-title');
+        const catEl = document.getElementById('notw-cat');
+        if (titleEl) titleEl.textContent = saved.title;
+        if (catEl) catEl.textContent = saved.category || '';
     }
 
-    const strip = document.createElement('div');
-    strip.id = 'notw-strip';
-    strip.className = 'notw-strip';
-    strip.innerHTML = `
-        <div class="notw-inner">
-            <span class="notw-badge">This Week</span>
-            <span class="notw-text">
-                <strong>${featuredTitle}</strong> &mdash; ${featuredCat}
-            </span>
-            <a href="#portfolio" class="notw-cta">View Look &rsaquo;</a>
-        </div>
-    `;
-    heroSection.insertAdjacentElement('afterend', strip);
+    // Wire the admin "Update Weekly Feature" button
+    const saveBtn = document.getElementById('notw-save-btn');
+    if (saveBtn) {
+        saveBtn.addEventListener('click', () => {
+            const customTitle = document.getElementById('notw-custom-title')?.value.trim();
+            const customCat = document.getElementById('notw-custom-cat')?.value.trim();
+
+            // If checkbox is checked, use the form's set title/category
+            const useUploadForm = document.getElementById('notw-checkbox')?.checked;
+            const title = useUploadForm
+                ? (document.getElementById('set-title')?.value.trim() || customTitle)
+                : customTitle;
+            const category = useUploadForm
+                ? (document.getElementById('set-category')?.value || customCat)
+                : customCat;
+
+            if (!title) {
+                if (window.showToast) window.showToast('Enter a title for the weekly feature first.');
+                return;
+            }
+
+            // Save to localStorage
+            const data = { title, category, updatedAt: new Date().toISOString() };
+            localStorage.setItem('aura-notw', JSON.stringify(data));
+
+            // Update the live strip immediately
+            const titleEl = document.getElementById('notw-title');
+            const catEl = document.getElementById('notw-cat');
+            if (titleEl) titleEl.textContent = title;
+            if (catEl) catEl.textContent = category;
+
+            if (window.showToast) window.showToast('Weekly feature updated successfully!');
+
+            // Clear fields
+            const t = document.getElementById('notw-custom-title');
+            const c = document.getElementById('notw-custom-cat');
+            const cb = document.getElementById('notw-checkbox');
+            if (t) t.value = '';
+            if (c) c.value = '';
+            if (cb) cb.checked = false;
+        });
+    }
 }
 
 
@@ -346,7 +369,7 @@ function disableDark(btn) {
 document.addEventListener('DOMContentLoaded', () => {
     initStatsCounter();
     initScrollReveal();
-    initFeatureStrip();
+    initNailOfTheWeek();
     initAvailabilityBadge();
     initButtonRipple();
     initTestimonialsCarousel();
