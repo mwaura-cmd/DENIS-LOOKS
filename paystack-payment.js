@@ -57,11 +57,13 @@ class PaystackPaymentEngine {
  // Populate modal fields
  document.getElementById('pay-set-title').textContent = this.currentBooking.setTitle;
  document.getElementById('pay-set-category').textContent = this.currentBooking.setCategory;
- document.getElementById('pay-set-img').src = this.currentBooking.setImageUrl;
+ const setImgEl = document.getElementById('pay-set-img');
+ if (setImgEl) setImgEl.src = this.currentBooking.setImageUrl;
  document.getElementById('pay-full-price').textContent = `Ksh ${pricing.totalPrice.toLocaleString()}`;
  document.getElementById('pay-deposit-price').textContent = `Ksh ${pricing.deposit.toLocaleString()}`;
  document.getElementById('pay-balance-price').textContent = `Ksh ${pricing.balance.toLocaleString()}`;
- document.getElementById('pay-ref-badge').textContent = this.currentBooking.reference;
+ const refBadge = document.getElementById('pay-ref-badge');
+ if (refBadge) refBadge.textContent = this.currentBooking.reference;
 
  // Populate Paystack manual transfer details
  const paystackAccEl = document.getElementById('paystack-acc-num');
