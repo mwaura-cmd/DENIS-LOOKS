@@ -370,10 +370,17 @@ body {
 .mobile-menu-btn {
   display: none;
   background: none;
-  border: none;
-  color: var(--text-main);
-  font-size: 1.5rem;
+  border: 1.5px solid rgba(255,255,255,0.25);
+  color: #ffffff;
+  font-size: 1.4rem;
   cursor: pointer;
+  padding: 6px 10px;
+  border-radius: 8px;
+  line-height: 1;
+  transition: background 0.2s;
+}
+.mobile-menu-btn:hover {
+  background: rgba(255,255,255,0.1);
 }
 
 /* ==========================================================================
@@ -1128,12 +1135,12 @@ section {
 
 .btn-book-look {
   flex: 1;
-  background: rgba(107, 39, 55, 0.08);
-  border: 1px solid var(--border-gold);
-  color: var(--gold-primary);
-  padding: 8px;
+  background: var(--gold-primary);
+  border: none;
+  color: #ffffff;
+  padding: 10px 8px;
   border-radius: var(--radius-sm);
-  font-size: 0.78rem;
+  font-size: 0.8rem;
   font-weight: 700;
   letter-spacing: 0.5px;
   text-align: center;
@@ -1143,11 +1150,14 @@ section {
   justify-content: center;
   gap: 6px;
   transition: all var(--transition-fast);
+  box-shadow: 0 4px 12px rgba(107, 39, 55, 0.3);
 }
 
 .btn-book-look:hover {
-  background: var(--gold-gradient);
+  background: var(--gold-light);
   color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(107, 39, 55, 0.45);
 }
 
 /* ==========================================================================

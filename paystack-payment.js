@@ -288,50 +288,55 @@ class PaystackPaymentEngine {
 
  // ─── Telegram Bot Notification ────────────────────────────────────────────
  async _sendTelegramNotification() {
- const botToken = this.getEnv('TELEGRAM_BOT_TOKEN', '');
- const chatId = this.getEnv('TELEGRAM_CHAT_ID', '');
+  // Wait for env vars to be loaded before reading keys
+  if (window.envLoader && window.envLoader.ready) {
+   await window.envLoader.ready;
+  }
 
- if (!botToken || !chatId || botToken === 'your_bot_token_here') {
- console.info('ℹ️ Telegram bot not configured — skipping notification.');
- return;
- }
+  const botToken = this.getEnv('TELEGRAM_BOT_TOKEN', '');
+  const chatId   = this.getEnv('TELEGRAM_CHAT_ID', '');
 
- const b = this.currentBooking;
- const text =
- ` *AURA NAILS HUB — PAYMENT RECEIVED* \n\n` +
- ` *Booking Ref:* \`${b.reference}\`\n` +
- ` *Client:* ${b.clientName || 'N/A'}\n` +
- ` *Contact:* ${b.clientPhone || b.clientEmail || 'N/A'}\n` +
- ` *Service:* ${b.setTitle} (${b.setCategory})\n` +
- ` *Appointment:* ${b.appointmentDate || 'TBC'}\n` +
- ` *Location:* ${b.location || 'Embu'}\n\n` +
- ` *Financials:*\n` +
- `├ Total Price: Ksh ${b.totalPrice?.toLocaleString()}\n` +
- `├ Deposit Paid: Ksh ${b.depositAmount?.toLocaleString()} \n` +
- `└ Balance Due: Ksh ${b.balanceAmount?.toLocaleString()}\n\n` +
- ` *Paystack Ref:* \`${b.transactionCode}\`\n` +
- ` *Paid At:* ${new Date(b.paidAt).toLocaleString('en-KE', { timeZone: 'Africa/Nairobi' })}`;
+  if (!botToken || !chatId || botToken === 'your_bot_token_here') {
+   console.info('Telegram bot not configured — skipping notification.');
+   return;
+  }
 
- try {
- const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
- const res = await fetch(url, {
- method: 'POST',
- headers: { 'Content-Type': 'application/json' },
- body: JSON.stringify({
- chat_id: chatId,
- text,
- parse_mode: 'Markdown'
- })
- });
- const data = await res.json();
- if (data.ok) {
- console.log(' Telegram notification sent successfully!');
- } else {
- console.warn('Telegram send failed:', data.description);
- }
- } catch (err) {
- console.warn('Telegram notification error:', err);
- }
+  const b = this.currentBooking;
+  const paidAtStr = b.paidAt
+   ? new Date(b.paidAt).toLocaleString('en-KE', { timeZone: 'Africa/Nairobi' })
+   : new Date().toLocaleString('en-KE', { timeZone: 'Africa/Nairobi' });
+
+  const text =
+   `*AURA NAILS HUB — DEPOSIT RECEIVED*\n\n` +
+   `*Booking Ref:* \`${b.reference}\`\n` +
+   `*Client:* ${b.clientName || 'N/A'}\n` +
+   `*Contact:* ${b.clientPhone || b.clientEmail || 'N/A'}\n` +
+   `*Service:* ${b.setTitle} (${b.setCategory})\n` +
+   `*Appointment:* ${b.appointmentDate || 'TBC'}\n` +
+   `*Location:* ${b.location || 'Embu'}\n\n` +
+   `*Financials:*\n` +
+   `Total Price: Ksh ${b.totalPrice?.toLocaleString()}\n` +
+   `Deposit Paid (30%): Ksh ${b.depositAmount?.toLocaleString()}\n` +
+   `Balance Due: Ksh ${b.balanceAmount?.toLocaleString()}\n\n` +
+   `*Paystack Ref:* \`${b.transactionCode}\`\n` +
+   `*Paid At:* ${paidAtStr}`;
+
+  try {
+   const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
+   const res = await fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ chat_id: chatId, text, parse_mode: 'Markdown' })
+   });
+   const data = await res.json();
+   if (data.ok) {
+    console.log('Telegram notification sent successfully!');
+   } else {
+    console.warn('Telegram send failed:', data.description);
+   }
+  } catch (err) {
+   console.warn('Telegram notification error:', err);
+  }
  }
 
  // ─── Save Booking ─────────────────────────────────────────────────────────
