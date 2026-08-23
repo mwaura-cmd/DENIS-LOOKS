@@ -523,6 +523,18 @@ function initUploadModal() {
  resetUploadForm();
  showToast('Set successfully published to Aura Nails Hub!');
 
+ // Auto-save Nail of the Week if checkbox was checked
+ const notwChecked = document.getElementById('notw-checkbox')?.checked;
+ if (notwChecked) {
+  const notwData = { title, category, updatedAt: new Date().toISOString() };
+  localStorage.setItem('aura-notw', JSON.stringify(notwData));
+  const titleEl = document.getElementById('notw-title');
+  const catEl = document.getElementById('notw-cat');
+  if (titleEl) titleEl.textContent = title;
+  if (catEl) catEl.textContent = category;
+  showToast('Weekly feature updated to: ' + title);
+ }
+
  // Scroll to gallery
  const gallerySection = document.getElementById('portfolio');
  if (gallerySection) gallerySection.scrollIntoView({ behavior: 'smooth' });

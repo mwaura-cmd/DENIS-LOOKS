@@ -50,6 +50,19 @@
   --radius-md: 16px;
   --radius-lg: 24px;
   --radius-full: 9999px;
+
+  /* ── Primary alias (used in premium.js components) ── */
+  --primary: #6B2737;
+  --primary-light: #8C3A4D;
+
+  /* ── Dark mode defaults (site is permanently dark) ── */
+  --bg-main: #111118;
+  --bg-secondary: #1a1a24;
+  --bg-card: #1e1e2a;
+  --text-main: #f0eded;
+  --text-muted: #9e9e9e;
+  --text-dim: #6b6b6b;
+  --border-subtle: rgba(255,255,255,0.08);
 }
 
 /* Reset & Base Styles */
@@ -62,13 +75,13 @@
 html {
   scroll-behavior: smooth;
   font-size: 16px;
-  color-scheme: light;
+  color-scheme: dark;
   overflow-x: hidden;
   max-width: 100%;
 }
 
 body {
-  background-color: var(--bg-primary);
+  background-color: var(--bg-main);
   color: var(--text-main);
   font-family: var(--font-body);
   line-height: 1.6;
@@ -202,15 +215,16 @@ body {
   z-index: 1000;
   padding: 18px 30px;
   transition: all var(--transition-smooth);
+  position: relative;
 }
 
 .site-header.header-scrolled {
   padding: 12px 30px;
-  background: rgba(255, 255, 255, 0.92);
+  background: rgba(17, 17, 24, 0.96);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border-subtle);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
 .nav-container {
@@ -2232,11 +2246,12 @@ section {
     top: 100%;
     left: 0;
     width: 100%;
-    background: #ffffff;
+    background: #111118;
     flex-direction: column;
-    padding: 15px 20px;
-    border-bottom: 1px solid var(--border-subtle);
-    box-shadow: 0 10px 30px rgba(107, 39, 55, 0.08);
+    padding: 10px 0;
+    border-bottom: 2px solid var(--primary);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+    z-index: 999;
   }
   .nav-menu.mobile-open {
     display: flex !important;
@@ -2244,11 +2259,16 @@ section {
   .nav-menu a {
     width: 100%;
     text-align: center;
-    padding: 12px 0;
-    border-bottom: 1px solid rgba(0,0,0,0.04);
+    padding: 14px 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
     font-size: 0.95rem;
     font-weight: 600;
-    color: var(--text-main);
+    color: #f0eded;
+    transition: background 0.2s, color 0.2s;
+  }
+  .nav-menu a:hover {
+    background: rgba(107, 39, 55, 0.15);
+    color: #ffffff;
   }
   .nav-menu a:last-child {
     border-bottom: none;
