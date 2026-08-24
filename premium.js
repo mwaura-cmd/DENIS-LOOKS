@@ -290,15 +290,16 @@ function initTestimonialsCarousel() {
 }
 
 
-/* ── 8. SOCIAL PROOF "LAST BOOKED" TOAST ────────────────────────────────── */
+/* ── 8. SOCIAL PROOF "LAST BOOKED" TOAST ───────────────────────────── */
 const SOCIAL_PROOF_DATA = [
-    { name: 'Faith W.', look: 'Chrome Ombre Coffin', time: '8 mins ago' },
-    { name: 'Stacy M.', look: 'Gumgel Tips + 3D', time: '23 mins ago' },
-    { name: 'Brenda K.', look: 'Almond French Tips', time: '41 mins ago' },
-    { name: 'Cynthia A.', look: 'Glitter Gel Pedi', time: '1 hr ago' },
-    { name: 'Sharon T.', look: 'Russian Manicure', time: '2 hrs ago' },
-    { name: 'Liz N.', look: '3D Floral Stiletto', time: '3 hrs ago' },
-    { name: 'Grace O.', look: 'Mirror Chrome Set', time: 'Today' },
+    { name: 'Faith W.', look: 'Chrome Ombre Coffin', time: '4 hrs ago' },
+    { name: 'Stacy M.', look: 'Gumgel Tips + 3D Art', time: '5 hrs ago' },
+    { name: 'Brenda K.', look: 'Almond French Tips', time: '6 hrs ago' },
+    { name: 'Cynthia A.', look: 'Glitter Gel Pedi', time: '4 hrs ago' },
+    { name: 'Sharon T.', look: 'Russian Manicure', time: '7 hrs ago' },
+    { name: 'Liz N.', look: '3D Floral Stiletto', time: '5 hrs ago' },
+    { name: 'Grace O.', look: 'Mirror Chrome Set', time: '8 hrs ago' },
+    { name: 'Joy K.', look: 'Pastel Gel Polish', time: '4 hrs ago' },
 ];
 
 function showSocialProofToast() {
@@ -333,11 +334,45 @@ function showSocialProofToast() {
 }
 
 function initSocialProof() {
-    // First toast after 8s, then random intervals 30-90s
+    let idx = 0;
+    // Show first toast 3 seconds after page load
     setTimeout(() => {
-        showSocialProofToast();
-        setInterval(showSocialProofToast, 35000 + Math.random() * 55000);
-    }, 8000);
+        showSocialProofToastByIdx(idx++);
+        // Then every 3 minutes cycle through the list
+        setInterval(() => {
+            showSocialProofToastByIdx(idx % SOCIAL_PROOF_DATA.length);
+            idx++;
+        }, 3 * 60 * 1000);
+    }, 3000);
+}
+
+function showSocialProofToastByIdx(i) {
+    const data = SOCIAL_PROOF_DATA[i % SOCIAL_PROOF_DATA.length];
+
+    let container = document.getElementById('social-proof-container');
+    if (!container) {
+        container = document.createElement('div');
+        container.id = 'social-proof-container';
+        document.body.appendChild(container);
+    }
+
+    const toast = document.createElement('div');
+    toast.className = 'social-proof-toast';
+    toast.innerHTML = `
+        <div class="sp-icon"><i class="fa-solid fa-certificate"></i></div>
+        <div class="sp-body">
+            <div class="sp-name">${data.name} just booked</div>
+            <div class="sp-look">${data.look}</div>
+            <div class="sp-time">${data.time}</div>
+        </div>
+        <button class="sp-close" onclick="this.parentElement.remove()">&times;</button>
+    `;
+    container.appendChild(toast);
+    setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateX(-120%)';
+        setTimeout(() => toast.remove(), 400);
+    }, 5000);
 }
 
 

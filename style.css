@@ -1002,9 +1002,9 @@ section {
 .card-image-wrap {
   position: relative;
   width: 100%;
-  height: 200px;
+  height: 185px;
   overflow: hidden;
-  background: #F5F5F5;
+  background: #1a1a24;
   cursor: pointer;
 }
 
@@ -2283,7 +2283,10 @@ section {
   .nav-menu a:last-child {
     border-bottom: none;
   }
-  .mobile-menu-btn { display: block; }
+  /* Nav hamburger — always visible on mobile */
+  .mobile-menu-btn { display: flex !important; align-items: center; justify-content: center; }
+  .nav-menu { display: none !important; }
+  .nav-menu.mobile-open { display: flex !important; }
   .nav-actions .btn-upload-nav { display: none; }
 
   /* Hero */
@@ -2719,3 +2722,40 @@ html.dark-mode .site-footer {
   .dark-mode-toggle { width: 32px; height: 32px; font-size: 0.8rem; }
 }
 
+/* ── Inspo scroll hint ─────────────────────────────────────────────────── */
+.inspo-scroll-hint {
+  text-align: center;
+  margin-top: 14px;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  opacity: 0.75;
+}
+.inspo-scroll-hint i {
+  animation: nudgeRight 1.5s ease-in-out infinite;
+}
+@keyframes nudgeRight {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(5px); }
+}
+
+/* ── Mobile gallery 2-column compact grid ─────────────────────────────── */
+@media (max-width: 600px) {
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  .card-image-wrap { height: 140px; }
+  .card-info { padding: 8px 10px !important; }
+  .card-title { font-size: 0.78rem !important; }
+  .card-style-sub { font-size: 0.68rem !important; }
+  .card-footer-btns { flex-direction: column; gap: 6px; }
+  .btn-book-look { padding: 7px 6px; font-size: 0.74rem; }
+  .review-card { padding: 12px 11px; }
+  .review-text { font-size: 0.8rem; }
+  .review-avatar { width: 30px; height: 30px; font-size: 0.8rem; }
+}
