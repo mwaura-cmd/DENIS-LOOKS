@@ -1747,17 +1747,19 @@ section {
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .site-header {
     padding: 15px 20px;
   }
 
   .nav-menu {
-    display: none;
+    display: none !important;
   }
 
   .mobile-menu-btn {
-    display: block;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
   }
 
   .hero-title {
@@ -2162,7 +2164,7 @@ section {
 .reviews-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+  gap: 14px;
 }
 
 .review-card {
@@ -2170,11 +2172,12 @@ section {
   backdrop-filter: blur(20px);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
-  padding: 18px 16px;
+  padding: 16px 14px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
   transition: all var(--transition-smooth);
+  min-height: 0;
 }
 
 .review-card:hover {
@@ -2276,17 +2279,6 @@ section {
     color: #f0eded;
     transition: background 0.2s, color 0.2s;
   }
-  .nav-menu a:hover {
-    background: rgba(107, 39, 55, 0.15);
-    color: #ffffff;
-  }
-  .nav-menu a:last-child {
-    border-bottom: none;
-  }
-  /* Nav hamburger — always visible on mobile */
-  .mobile-menu-btn { display: flex !important; align-items: center; justify-content: center; }
-  .nav-menu { display: none !important; }
-  .nav-menu.mobile-open { display: flex !important; }
   .nav-actions .btn-upload-nav { display: none; }
 
   /* Hero */
