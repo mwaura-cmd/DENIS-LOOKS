@@ -2213,15 +2213,11 @@ section {
   background: var(--bg-card);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
-  padding: 14px 12px;
+  padding: 24px 20px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 12px;
   transition: all var(--transition-smooth);
-  overflow: hidden;
-  /* true square via aspect-ratio */
-  aspect-ratio: 1 / 1;
-  min-height: 0;
 }
 
 .review-card:hover {
@@ -2232,43 +2228,38 @@ section {
 
 .review-stars {
   display: flex;
-  gap: 2px;
+  gap: 4px;
   color: var(--gold-primary);
-  font-size: 0.7rem;
+  font-size: 1.1rem;
   flex-shrink: 0;
 }
 
 .review-text {
-  font-size: 0.72rem;
+  font-size: 1rem;
   color: var(--text-muted);
-  line-height: 1.4;
+  line-height: 1.6;
   flex-grow: 1;
   font-style: italic;
-  /* Clamp to 4 lines so text doesn't overflow the square */
-  display: -webkit-box;
-  -webkit-line-clamp: 4;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
 }
 
 .review-author {
   display: flex;
   align-items: center;
-  gap: 7px;
-  padding-top: 8px;
+  gap: 12px;
+  padding-top: 12px;
   border-top: 1px solid var(--border-subtle);
   margin-top: auto;
   flex-shrink: 0;
 }
 
 .review-avatar {
-  width: 26px;
-  height: 26px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   background: var(--gold-gradient);
   color: #fff;
   font-weight: 800;
-  font-size: 0.7rem;
+  font-size: 1.1rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2277,11 +2268,8 @@ section {
 
 .review-name {
   font-weight: 700;
-  font-size: 0.72rem;
+  font-size: 0.95rem;
   color: var(--text-main);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .review-meta {
@@ -2414,10 +2402,10 @@ section {
   
   /* Review cards — compact on mobile */
   .reviews-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
+    grid-template-columns: 1fr;
+    gap: 16px;
   }
-  .review-card { padding: 14px 13px; gap: 8px; }
+  .review-card { padding: 20px; gap: 12px; }
   .btn-primary, .btn-secondary { padding: 13px 22px; font-size: 0.85rem; }
 
   /* Gallery card content compact */
