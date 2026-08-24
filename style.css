@@ -1749,17 +1749,59 @@ section {
 
 @media (max-width: 1024px) {
   .site-header {
-    padding: 15px 20px;
+    padding: 12px 16px;
   }
 
+  /* Hide all nav links — show hamburger instead */
   .nav-menu {
     display: none !important;
   }
+  .nav-menu.mobile-open {
+    display: flex !important;
+    flex-direction: column;
+    position: fixed;
+    top: 62px;
+    left: 0;
+    width: 100%;
+    background: #111118;
+    padding: 8px 0;
+    border-bottom: 2px solid var(--primary);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.6);
+    z-index: 9999;
+  }
+  .nav-menu.mobile-open li { width: 100%; }
+  .nav-menu.mobile-open a {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 14px 20px;
+    color: #f0eded;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .nav-menu.mobile-open a:hover {
+    background: rgba(107,39,55,0.2);
+    color: #fff;
+  }
 
+  /* Show hamburger */
   .mobile-menu-btn {
     display: flex !important;
     align-items: center;
     justify-content: center;
+  }
+
+  /* Hide clutter on mobile header */
+  .btn-upload-nav { display: none !important; }
+  .avail-badge { display: none !important; }
+  .dark-mode-toggle { display: none !important; }
+
+  /* Shrink Book Now on small screens */
+  .btn-book-nav {
+    font-size: 0.78rem;
+    padding: 8px 14px;
+    white-space: nowrap;
   }
 
   .hero-title {
