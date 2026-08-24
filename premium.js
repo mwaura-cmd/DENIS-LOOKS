@@ -129,11 +129,11 @@ function initNailOfTheWeek() {
             if (setId && window.openLightbox) {
                 e.preventDefault();
                 // Scroll to portfolio first so lightbox has context, then open
-                const portfolio = document.getElementById('portfolio');
+                const portfolio = document.getElementById('services-portfolio');
                 if (portfolio) portfolio.scrollIntoView({ behavior: 'smooth' });
                 setTimeout(() => window.openLightbox(setId), 400);
             }
-            // else: default href="#portfolio" scroll behaviour kicks in
+            // else: default href="#services-portfolio" scroll behaviour kicks in
         });
     }
 
