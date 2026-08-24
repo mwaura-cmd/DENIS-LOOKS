@@ -121,6 +121,22 @@ function initNailOfTheWeek() {
         if (catEl) catEl.textContent = saved.category || '';
     }
 
+    // Wire the "View Look" link to open the specific set lightbox
+    const viewLink = document.querySelector('.notw-cta');
+    if (viewLink) {
+        viewLink.addEventListener('click', (e) => {
+            const setId = saved?.setId || viewLink.dataset.setId;
+            if (setId && window.openLightbox) {
+                e.preventDefault();
+                // Scroll to portfolio first so lightbox has context, then open
+                const portfolio = document.getElementById('portfolio');
+                if (portfolio) portfolio.scrollIntoView({ behavior: 'smooth' });
+                setTimeout(() => window.openLightbox(setId), 400);
+            }
+            // else: default href="#portfolio" scroll behaviour kicks in
+        });
+    }
+
     // Wire the admin "Update Weekly Feature" button
     const saveBtn = document.getElementById('notw-save-btn');
     if (saveBtn) {

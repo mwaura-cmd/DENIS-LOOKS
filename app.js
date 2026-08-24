@@ -526,12 +526,18 @@ function initUploadModal() {
  // Auto-save Nail of the Week if checkbox was checked
  const notwChecked = document.getElementById('notw-checkbox')?.checked;
  if (notwChecked) {
-  const notwData = { title, category, updatedAt: new Date().toISOString() };
+  const notwData = { title, category, setId: newSet.id, updatedAt: new Date().toISOString() };
   localStorage.setItem('aura-notw', JSON.stringify(notwData));
   const titleEl = document.getElementById('notw-title');
   const catEl = document.getElementById('notw-cat');
   if (titleEl) titleEl.textContent = title;
   if (catEl) catEl.textContent = category;
+  // Wire the view look link to the specific set
+  const viewLink = document.querySelector('.notw-cta');
+  if (viewLink) {
+   viewLink.href = '#portfolio';
+   viewLink.dataset.setId = newSet.id;
+  }
   showToast('Weekly feature updated to: ' + title);
  }
 
@@ -965,3 +971,6 @@ document.addEventListener('DOMContentLoaded', () => {
  });
  });
 });
+
+// Expose openLightbox globally for external scripts (e.g. premium.js NOTW strip)
+window.openLightbox = openLightbox;
