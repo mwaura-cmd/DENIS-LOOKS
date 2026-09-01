@@ -974,3 +974,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Expose openLightbox globally for external scripts (e.g. premium.js NOTW strip)
 window.openLightbox = openLightbox;
+
+// Expose a live reference to allSets so premium.js NOTW can look up sets by title
+Object.defineProperty(window, '__allSetsRef', {
+  get: () => allSets,
+  configurable: true
+});
+
+// Expose a gallery filter helper so NOTW "View Look" can filter by category
+// when no specific setId is stored (e.g. manually entered weekly features)
+window.filterGalleryByCategory = function(category) {
+  if (!category) return;
+  // Find the matching filter button and click it to trigger the existing filter logic
+  const filterBtns = document.querySelectorAll('[data-category]');
+  let matched = false;
+  filterBtns.forEach(btn => {
+    const btnCat = btn.dataset.category || '';
+    if (
+      category.toLowerCase().includes(btnCat.toLowerCase()) ||
+      btnCat.toLowerCase().includes(category.toLowerCase().split(' ')[0])
+    ) {
+      btn.click();
+      matched = true;
+    }
+  });
+  // Fallback: just update currentCategory and re-render
+  if (!matched) {
+    currentCategory = 'all';
+    renderGallery();
+  }
+};

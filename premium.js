@@ -112,28 +112,64 @@ window.premiumShowSkeletons = showGallerySkeletons;
 
 /* ── 4. NAIL OF THE WEEK — localStorage powered ─────────────────────── */
 function initNailOfTheWeek() {
-    // Load saved NOTW from localStorage and update static HTML
-    const saved = JSON.parse(localStorage.getItem('aura-notw') || 'null');
-    if (saved && saved.title) {
-        const titleEl = document.getElementById('notw-title');
-        const catEl = document.getElementById('notw-cat');
-        if (titleEl) titleEl.textContent = saved.title;
-        if (catEl) catEl.textContent = saved.category || '';
+    // Load saved NOTW and update the strip text
+    function getSaved() {
+        return JSON.parse(localStorage.getItem('aura-notw') || 'null');
     }
 
-    // Wire the "View Look" link to open the specific set lightbox
+    function applyNotwToStrip(data) {
+        if (!data || !data.title) return;
+        const titleEl = document.getElementById('notw-title');
+        const catEl   = document.getElementById('notw-cat');
+        if (titleEl) titleEl.textContent = data.title;
+        if (catEl)   catEl.textContent   = data.category || '';
+    }
+
+    applyNotwToStrip(getSaved());
+
+    // Helper: attempt to open the lightbox, retrying up to maxTries times
+    // if allSets hasn't been populated from Firebase yet
+    function tryOpenLightbox(setId, tries) {
+        if (!setId) return;
+        if (tries <= 0) return; // gave up
+        if (window.openLightbox) {
+            const result = window.openLightbox(setId);
+            // openLightbox returns undefined (not false) when it bails — so we
+            // detect a miss by checking if the lightbox modal didn't become active
+            const modal = document.getElementById('lightbox-modal');
+            if (modal && modal.classList.contains('active')) return; // success
+            // Not open yet — set not loaded, retry after 300ms
+            setTimeout(() => tryOpenLightbox(setId, tries - 1), 300);
+        }
+    }
+
+    // Wire the "View Look" CTA
     const viewLink = document.querySelector('.notw-cta');
     if (viewLink) {
         viewLink.addEventListener('click', (e) => {
-            const setId = saved?.setId || viewLink.dataset.setId;
+            // Always re-read from localStorage so we catch updates made after page load
+            const current = getSaved();
+            const setId = current?.setId || viewLink.dataset.setId;
+
             if (setId && window.openLightbox) {
                 e.preventDefault();
-                // Scroll to portfolio first so lightbox has context, then open
+                // Scroll to portfolio section first so the lightbox opens in context
                 const portfolio = document.getElementById('services-portfolio');
                 if (portfolio) portfolio.scrollIntoView({ behavior: 'smooth' });
-                setTimeout(() => window.openLightbox(setId), 400);
+                // Try to open lightbox; retry up to 8x (2.4s window) for Firebase async load
+                setTimeout(() => tryOpenLightbox(setId, 8), 350);
+                return;
             }
-            // else: default href="#services-portfolio" scroll behaviour kicks in
+
+            // No setId — scroll to gallery and optionally filter by category
+            e.preventDefault();
+            const current2 = getSaved();
+            const cat = current2?.category;
+            if (cat && window.filterGalleryByCategory) {
+                window.filterGalleryByCategory(cat);
+            }
+            const section = document.getElementById('services-portfolio');
+            if (section) section.scrollIntoView({ behavior: 'smooth' });
         });
     }
 
@@ -142,11 +178,11 @@ function initNailOfTheWeek() {
     if (saveBtn) {
         saveBtn.addEventListener('click', () => {
             const customTitle = document.getElementById('notw-custom-title')?.value.trim();
-            const customCat = document.getElementById('notw-custom-cat')?.value.trim();
+            const customCat   = document.getElementById('notw-custom-cat')?.value.trim();
 
-            // If checkbox is checked, use the form's set title/category
+            // If checkbox is checked, pull from the currently-open upload form fields
             const useUploadForm = document.getElementById('notw-checkbox')?.checked;
-            const title = useUploadForm
+            const title    = useUploadForm
                 ? (document.getElementById('set-title')?.value.trim() || customTitle)
                 : customTitle;
             const category = useUploadForm
@@ -158,24 +194,34 @@ function initNailOfTheWeek() {
                 return;
             }
 
-            // Save to localStorage
+            // Try to find an existing set that matches the title so we can store its id
+            // This lets "View Look" open the lightbox directly rather than just scrolling
+            let setId = null;
+            if (window.__allSetsRef) {
+                const match = window.__allSetsRef.find(
+                    s => s.title.toLowerCase() === title.toLowerCase()
+                );
+                if (match) setId = match.id;
+            }
+
             const data = { title, category, updatedAt: new Date().toISOString() };
+            if (setId) data.setId = setId;
             localStorage.setItem('aura-notw', JSON.stringify(data));
 
-            // Update the live strip immediately
-            const titleEl = document.getElementById('notw-title');
-            const catEl = document.getElementById('notw-cat');
-            if (titleEl) titleEl.textContent = title;
-            if (catEl) catEl.textContent = category;
+            applyNotwToStrip(data);
 
-            if (window.showToast) window.showToast('Weekly feature updated successfully!');
+            // Also update the data-set-id on the view link so it works immediately
+            const vl = document.querySelector('.notw-cta');
+            if (vl && setId) vl.dataset.setId = setId;
 
-            // Clear fields
-            const t = document.getElementById('notw-custom-title');
-            const c = document.getElementById('notw-custom-cat');
+            if (window.showToast) window.showToast('Weekly feature updated! ✨');
+
+            // Clear form fields
+            const t  = document.getElementById('notw-custom-title');
+            const c  = document.getElementById('notw-custom-cat');
             const cb = document.getElementById('notw-checkbox');
-            if (t) t.value = '';
-            if (c) c.value = '';
+            if (t)  t.value = '';
+            if (c)  c.value = '';
             if (cb) cb.checked = false;
         });
     }
