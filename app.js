@@ -96,7 +96,7 @@ const DEFAULT_SETS = [
  category: "Gumgel Overlays",
  style: "Chrome 3D & Sculpted Moulding",
  description: "Heavy structural Gumgel overlays with dimensional moulding art.",
- price: 1600,
+ price: 1500,
  imageUrl: "nails8.png.png",
  tags: ["Gumgel", "Sculpted", "Moulding", "HeavyArt"],
  likes: 49,
@@ -156,7 +156,7 @@ const DEFAULT_SETS = [
  category: "Tips + Gel",
  style: "Ombre Long Stiletto Extension",
  description: "Fiery sunset aura ombre blended to perfection on sharp stilettos.",
- price: 1500,
+ price: 1100,
  imageUrl: "nails13.png.png",
  tags: ["Ombre", "Stiletto", "SunsetGlow", "Vibrant"],
  likes: 42,
@@ -686,11 +686,30 @@ function initPriceCalculator() {
  let extName = "No Extension";
  let artName = "Minimal / Single Tone";
 
- function updateCalculator() {
- const total = basePrice + extensionPrice + artPrice + addOnPrice;
- const deposit = Math.ceil(total * 0.3);
+  // Price caps per service category
+  const TIPS_GEL_CAP   = 1100;  // Tips + Gel max
+  const GUMGEL_CAP     = 1500;  // Gumgel + Tips max
 
- document.getElementById('calc-total').textContent = `Ksh ${total.toLocaleString()}`;
+  function getServiceCap() {
+    if (basePrice === 1000) return GUMGEL_CAP;       // Gumgel base
+    if (basePrice === 400 && extensionPrice > 0) return TIPS_GEL_CAP; // Gel + extension
+    return Infinity; // Plain gel / pedicure — already capped at 400 base, no hard limit needed
+  }
+
+  function updateCalculator() {
+  const rawTotal = basePrice + extensionPrice + artPrice + addOnPrice;
+  const cap = getServiceCap();
+  const total = Math.min(rawTotal, cap);
+  const deposit = Math.ceil(total * 0.3);
+
+  // Show cap notice if clamped
+  const capNotice = document.getElementById('calc-cap-notice');
+  if (capNotice) {
+    capNotice.style.display = rawTotal > cap ? 'block' : 'none';
+    capNotice.textContent = `Price capped at Ksh ${cap.toLocaleString()} for this service.`;
+  }
+
+  document.getElementById('calc-total').textContent = `Ksh ${total.toLocaleString()}`;
  document.getElementById('summary-base').textContent = `Ksh ${basePrice.toLocaleString()}`;
  document.getElementById('summary-ext').textContent = `Ksh ${extensionPrice.toLocaleString()}`;
  document.getElementById('summary-art').textContent = `Ksh ${artPrice.toLocaleString()}`;
