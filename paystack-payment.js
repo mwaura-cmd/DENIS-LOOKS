@@ -238,7 +238,8 @@ class PaystackPaymentEngine {
 
  // Fire browser push notification + Telegram bot alert
  this._sendSuccessNotification();
- this._sendTelegramNotification();
+ // Await so errors are not silently swallowed
+ await this._sendTelegramNotification();
  }
 
  // ─── Complete Manual Transfer ─────────────────────────────────────────────
@@ -288,7 +289,7 @@ class PaystackPaymentEngine {
 
  // ─── Telegram Bot Notification ────────────────────────────────────────────
  async _sendTelegramNotification() {
-  // Wait for env vars to be loaded before reading keys
+  // Wait for env vars to be fully loaded before reading keys
   if (window.envLoader && window.envLoader.ready) {
    await window.envLoader.ready;
   }
@@ -306,36 +307,43 @@ class PaystackPaymentEngine {
    ? new Date(b.paidAt).toLocaleString('en-KE', { timeZone: 'Africa/Nairobi' })
    : new Date().toLocaleString('en-KE', { timeZone: 'Africa/Nairobi' });
 
+  // Safe field helpers — undefined/null breaks Telegram message parsing
+  const safe = (val) => (val !== undefined && val !== null && val !== '') ? String(val) : 'N/A';
+  const safeMoney = (val) => (val !== undefined && val !== null) ? Number(val).toLocaleString() : '0';
+
+  // Use HTML parse_mode — immune to special chars in client/service names
+  // Old Markdown v1 breaks on underscores, asterisks, backticks in free-text fields
   const text =
-   `*AURA NAILS HUB — DEPOSIT RECEIVED*\n\n` +
-   `*Booking Ref:* \`${b.reference}\`\n` +
-   `*Client:* ${b.clientName || 'N/A'}\n` +
-   `*Contact:* ${b.clientPhone || b.clientEmail || 'N/A'}\n` +
-   `*Service:* ${b.setTitle} (${b.setCategory})\n` +
-   `*Appointment:* ${b.appointmentDate || 'TBC'}\n` +
-   `*Location:* ${b.location || 'Embu'}\n\n` +
-   `*Financials:*\n` +
-   `Total Price: Ksh ${b.totalPrice?.toLocaleString()}\n` +
-   `Deposit Paid (30%): Ksh ${b.depositAmount?.toLocaleString()}\n` +
-   `Balance Due: Ksh ${b.balanceAmount?.toLocaleString()}\n\n` +
-   `*Paystack Ref:* \`${b.transactionCode}\`\n` +
-   `*Paid At:* ${paidAtStr}`;
+   `<b>🔔 AURA NAILS HUB — DEPOSIT RECEIVED</b>\n\n` +
+   `<b>Booking Ref:</b> <code>${safe(b.reference)}</code>\n` +
+   `<b>Client:</b> ${safe(b.clientName)}\n` +
+   `<b>Contact:</b> ${safe(b.clientPhone || b.clientEmail)}\n` +
+   `<b>Service:</b> ${safe(b.setTitle)} (${safe(b.setCategory)})\n` +
+   `<b>Appointment:</b> ${safe(b.appointmentDate)}\n` +
+   `<b>Location:</b> ${safe(b.location)}\n\n` +
+   `<b>💰 Financials:</b>\n` +
+   `Total Price: Ksh ${safeMoney(b.totalPrice)}\n` +
+   `Deposit Paid (30%): Ksh ${safeMoney(b.depositAmount)}\n` +
+   `Balance Due: Ksh ${safeMoney(b.balanceAmount)}\n\n` +
+   `<b>Paystack Ref:</b> <code>${safe(b.transactionCode)}</code>\n` +
+   `<b>Paid At:</b> ${paidAtStr}`;
 
   try {
    const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
    const res = await fetch(url, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ chat_id: chatId, text, parse_mode: 'Markdown' })
+    body: JSON.stringify({ chat_id: chatId, text, parse_mode: 'HTML' })
    });
    const data = await res.json();
    if (data.ok) {
-    console.log('Telegram notification sent successfully!');
+    console.log('✅ Telegram notification sent successfully!');
    } else {
-    console.warn('Telegram send failed:', data.description);
+    // Log full API response so we can debug if it fails again
+    console.warn('❌ Telegram send failed:', data.description, '| Response:', JSON.stringify(data));
    }
   } catch (err) {
-   console.warn('Telegram notification error:', err);
+   console.warn('❌ Telegram notification network error:', err);
   }
  }
 
